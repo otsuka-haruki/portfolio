@@ -9,7 +9,7 @@ const MobileAppBar = (props) => {
 
     const abbBarStyle = {
         boxShadow: 0,
-        padding: '1rem 0.5rem 1rem 0.5rem',
+        padding: '0.5rem 0.5rem 1rem 0.5rem',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
