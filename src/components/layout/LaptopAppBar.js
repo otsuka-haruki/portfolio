@@ -5,7 +5,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { v4 as uuid } from "uuid";
 import LinkButton from "components/common/LinkButton";
 
-const AppBar = () => {
+const LaptopAppBar = () => {
     const [anchorElement, setAnchorElement] = useState(null);
     const [selectedLang, setSelectedLang] = useState('日本語');
     const open = Boolean(anchorElement);
@@ -26,17 +26,12 @@ const AppBar = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        // borderBottom: '1px solid'
     }
 
     const langOptions = ['日本語', 'English'];
 
     return (
-        <MuiAppBar
-            position="fixed"
-            color="white"
-            sx={abbBarStyle}
-        >
+        <MuiAppBar position="fixed" color="white" sx={abbBarStyle}>
             <Box>
                 <Typography variant="h5" sx={{ letterSpacing: 1 }}>Portfolio</Typography>
             </Box>
@@ -66,4 +61,4 @@ const AppBar = () => {
     )
 }
 
-export default AppBar
+export default LaptopAppBar
