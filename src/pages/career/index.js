@@ -19,7 +19,7 @@ const Index = () => {
         organization: 'Gallery Art Point',
         location: 'Ginza, Tokyo'
     }, {
-        date: '2021/03 -07',
+        date: '2021/03 - 07',
         incoming: false,
         active: false,
         role: 'Intern',
