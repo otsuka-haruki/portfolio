@@ -21,7 +21,7 @@ const LaptopAppBar = () => {
 
     const abbBarStyle = {
         boxShadow: 0,
-        padding: '1rem 1rem 1rem 1.5rem',
+        padding: '1rem',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
