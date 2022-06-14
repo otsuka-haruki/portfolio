@@ -1,6 +1,6 @@
 import { Backdrop, LinearProgress, Box } from "@mui/material"
 
-const LoadingBackDrop = ({ open }) => {
+const LoadingBackdrop = ({ open }) => {
     return (
         <Backdrop
             sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -13,4 +13,4 @@ const LoadingBackDrop = ({ open }) => {
     )
 }
 
-export default LoadingBackDrop
+export default LoadingBackdrop

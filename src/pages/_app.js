@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { ThemeProvider } from '@mui/material';
-import LoadingBackDrop from 'components/layout/LoadingBackDrop';
+import LoadingBackdrop from 'components/layout/LoadingBackdrop';
 import Layout from 'components/layout/Layout';
 import { customTheme } from 'config/mui';
 import '../styles/globals.css';
@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={customTheme}>
         <Layout>
           <Component {...pageProps} />
-          <LoadingBackDrop open={showLoading} />
+          <LoadingBackdrop open={showLoading} />
         </Layout>
       </ThemeProvider>
     </>
