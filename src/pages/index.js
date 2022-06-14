@@ -1,28 +1,32 @@
 import { useState } from 'react';
 import { Button, Typography, Box, CircularProgress } from '@mui/material';
 
-const Index = () => {
-  const [demoData, setDemoData] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-
-  const fetchFromDatabase = async () => {
-    setIsFetching(true);
-    const response = await fetch('/api/hello');
-    const result = await response.json();
-    setDemoData(result.result);
-    setIsFetching(false);
-  }
+const Index = (props) => {
+  const firstRow = props.rows[0];
 
   return (
     <>
-      <Button variant="outlined" onClick={fetchFromDatabase}>Action</Button>
-      {isFetching &&
-        <Box>
-          <CircularProgress />
-        </Box>}
-      {!isFetching && demoData.length !== 0 && <Typography variant="body1">{demoData[0].organization}</Typography>}
+      <Button variant="outlined" disabled>Action</Button>
+      <Typography variant="body1">{firstRow.organization}</Typography>
     </>
   )
 }
 
-export default Index
+export default Index;
+
+export async function getServerSideProps() {
+  const mysql = require('mysql2/promise');
+  try {
+    const connection = await mysql.createConnection(process.env.DATABASE_URL);
+    const [rows] = await connection.query('SELECT * FROM portfolio_career');
+    connection.end();
+    return {
+      props: {
+        rows
+      }
+    }
+  } catch (error) {
+    console.log('Error!');
+    console.log(error);
+  }
+}
