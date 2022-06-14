@@ -3,20 +3,24 @@ import { Button, Typography, Box, CircularProgress } from '@mui/material';
 
 const Index = () => {
   const [demoData, setDemoData] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const testDatabase = async () => {
+  const fetchFromDatabase = async () => {
+    setIsFetching(true);
     const response = await fetch('/api/hello');
     const result = await response.json();
     setDemoData(result.result);
+    setIsFetching(false);
   }
 
   return (
     <>
-      <Button variant="outlined" onClick={testDatabase}>Action</Button>
-      {demoData.length === 0 && <Box>
-        <CircularProgress />
-      </Box>}
-      {demoData.length !== 0 && <Typography variant="body1">{demoData[0].organization}</Typography>}
+      <Button variant="outlined" onClick={fetchFromDatabase}>Action</Button>
+      {isFetching &&
+        <Box>
+          <CircularProgress />
+        </Box>}
+      {!isFetching && demoData.length !== 0 && <Typography variant="body1">{demoData[0].organization}</Typography>}
     </>
   )
 }
