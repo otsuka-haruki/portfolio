@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppBar, Box, Typography, Button } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -18,7 +19,11 @@ const MobileAppBar = (props) => {
     return (
         <AppBar position="fixed" color="white" sx={abbBarStyle}>
             <Box>
-                <Typography variant="h5" sx={{ letterSpacing: 1 }}>Portfolio</Typography>
+                <Button>
+                    <Link href='/'>
+                        <Typography variant="h5" sx={{ letterSpacing: 1 }}>Portfolio</Typography>
+                    </Link>
+                </Button>
             </Box>
             <Box>
                 <Button onClick={openDrawer}><MenuIcon /></Button>

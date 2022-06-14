@@ -17,7 +17,7 @@ const LaptopAppBar = () => {
         closeLangMenu();
     };
 
-    const closeLangMenu = () => setAnchorElement(null)
+    const closeLangMenu = () => setAnchorElement(null);
 
     const abbBarStyle = {
         boxShadow: 0,
@@ -33,10 +33,16 @@ const LaptopAppBar = () => {
     return (
         <MuiAppBar position="fixed" color="white" sx={abbBarStyle}>
             <Box>
-                <Typography variant="h5" sx={{ letterSpacing: 1 }}>Portfolio</Typography>
+                <Button>
+                    <Link href='/'>
+                        <Typography variant="h5" sx={{ letterSpacing: 1 }}>Portfolio</Typography>
+                    </Link>
+                </Button>
             </Box>
+
             <Box>
-                <LinkButton href="/career">Career</LinkButton>
+                <LinkButton href="/career">career</LinkButton>
+                <LinkButton href="/blogs">blogs</LinkButton>
                 <Button onClick={openLangMenu} endIcon={<ArrowDropDownIcon />}>{selectedLang}</Button>
             </Box>
 
