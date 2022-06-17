@@ -8,9 +8,9 @@ const Drawer = (props) => {
     const closeDrawer = () => setDrawerOpen(false);
 
     const pageItems = [
-        { text: 'top', link: '/' },
-        { text: 'career', link: '/career' },
-        { text: 'blogs', link: '/blogs' }].map(page => (
+        { text: 'トップ', link: '/' },
+        { text: '経歴', link: '/career' },
+        { text: 'ブログ', link: '/blogs' }].map(page => (
             <ListItem key={uuid()}>
                 <ListItemButton onClick={closeDrawer} sx={{ textAlign: 'center' }}>
                     <Link href={page.link}>

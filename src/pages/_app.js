@@ -6,6 +6,7 @@ import LoadingBackdrop from 'components/layout/LoadingBackdrop';
 import Layout from 'components/layout/Layout';
 import { customTheme } from 'config/mui';
 import '../styles/globals.css';
+import { UserContextProvider } from 'context/userContext';
 
 function MyApp({ Component, pageProps }) {
   const [showLoading, setShowLoading] = useState(false);
@@ -31,12 +32,14 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider theme={customTheme}>
-        <Layout>
-          <Component {...pageProps} />
-          <LoadingBackdrop open={showLoading} />
-        </Layout>
-      </ThemeProvider>
+      <UserContextProvider>
+        <ThemeProvider theme={customTheme}>
+          <Layout>
+            <Component {...pageProps} />
+            <LoadingBackdrop open={showLoading} />
+          </Layout>
+        </ThemeProvider>
+      </UserContextProvider>
     </>
   )
 }

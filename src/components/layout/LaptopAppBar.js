@@ -41,8 +41,8 @@ const LaptopAppBar = () => {
             </Box>
 
             <Box>
-                <LinkButton href="/career">career</LinkButton>
-                <LinkButton href="/blogs">blogs</LinkButton>
+                <LinkButton href="/career">経歴</LinkButton>
+                <LinkButton href="/blogs">ブログ</LinkButton>
                 <Button onClick={openLangMenu} endIcon={<ArrowDropDownIcon />}>{selectedLang}</Button>
             </Box>
 
@@ -57,6 +57,7 @@ const LaptopAppBar = () => {
                             key={uuid()}
                             onClick={event => handleMenuItemClick(event, index)}
                             selected={index === selectedLang}
+                            disabled
                         >
                             {option}
                         </MenuItem>
