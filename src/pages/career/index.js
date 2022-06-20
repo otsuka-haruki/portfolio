@@ -18,7 +18,7 @@ const Index = (props) => {
 
 export default Index
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const { MongoClient } = require('mongodb');
     const userName = process.env.MONGODB_USERNAME;
     const password = process.env.MONGODB_PASSWORD;
@@ -42,6 +42,7 @@ export async function getServerSideProps() {
     return {
         props: {
             result: JSON.stringify(result)
-        }
+        },
+        revalidate: 60
     }
 }
