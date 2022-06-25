@@ -1,10 +1,15 @@
+import { useState } from "react";
 import InputCard from "./InputCard"
-import Typography from '@mui/material/Typography'
+import ExistingCareerLists from "./ExistingCareerLists";
 
-const CareerEditHome = () => {
+const CareerEditHome = (props) => {
+    const { careerData } = props;
+    const [editTargetId, setEditTargetId] = useState('');
+
     return (
         <>
-            <InputCard />
+            <InputCard careerData={careerData} editTargetId={editTargetId} />
+            <ExistingCareerLists careerData={careerData} setEditTargetId={setEditTargetId} />
         </>
     )
 }

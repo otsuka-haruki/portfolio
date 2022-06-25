@@ -1,9 +1,18 @@
 import { CardContent, Typography, TextField, Button, Grid } from "@mui/material";
 import DefaultCard from "components/common/DefaultCard";
+import { useEffect, useState } from "react";
 
-const InputCard = () => {
+const InputCard = (props) => {
+    const { careerData, editTargetId } = props;
+    const [previousData, setPreviousData] = useState({});
+
+    useEffect(() => {
+        const targetPrevData = careerData.find(career => career._id === editTargetId);
+        setPreviousData(targetPrevData);
+    }, [editTargetId]);
+
     return (
-        <DefaultCard>
+        <DefaultCard sx={{ mb: 4 }}>
             <CardContent>
                 <Typography variant="h6">Edit</Typography>
                 <Grid container spacing={2} sx={{ mt: 0, mb: 2 }}>

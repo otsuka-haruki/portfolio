@@ -8,7 +8,7 @@ const Index = (props) => {
     return (
         <>
             <Head>
-                <title>経歴</title>
+                <title>経歴 | 大塚遥輝のポートフォリオ</title>
             </Head>
 
             <CareerHome careerData={data} />
