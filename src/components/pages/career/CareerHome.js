@@ -2,7 +2,7 @@ import PageTitle from "components/common/PageTitle";
 import ExperienceBlock from "./ExperienceBlock";
 import EducationBlock from "./EducationBlock";
 import VolunteerBlock from "./VolunteerBlock";
-import { Container, Divider } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 
 const CareerHome = (props) => {
     const { careerData } = props;
@@ -17,16 +17,14 @@ const CareerHome = (props) => {
     const currentDate = year + '/' + month;
 
     return (
-        <>
-            <Container maxWidth="lg" sx={{ '& h5': { mb: 2, fontWeight: 500 } }}>
-                <PageTitle text='経歴' />
-                <ExperienceBlock experienceData={experienceData} currentDate={currentDate} />
-                <Divider sx={{ mb: 2 }} />
-                <EducationBlock educationData={educationData} currentDate={currentDate} />
-                <Divider sx={{ mb: 2 }} />
-                <VolunteerBlock volunteerData={volunteerData} currentDate={currentDate} />
-            </Container>
-        </>
+        <Box sx={{ '& h5': { mb: 2, fontWeight: 500 } }}>
+            <PageTitle text='経歴' />
+            <ExperienceBlock experienceData={experienceData} currentDate={currentDate} />
+            <Divider sx={{ mb: 2 }} />
+            <EducationBlock educationData={educationData} currentDate={currentDate} />
+            <Divider sx={{ mb: 2 }} />
+            <VolunteerBlock volunteerData={volunteerData} currentDate={currentDate} />
+        </Box>
     )
 }
 

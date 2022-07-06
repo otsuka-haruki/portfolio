@@ -1,8 +1,8 @@
-import { Container as MuiContainer } from "@mui/material"
+import { Container as MuiContainer, Toolbar } from "@mui/material"
 
 const Container = ({ children }) => {
     return (
-        <MuiContainer maxWidth="lg" sx={{ mt: 10, pb: 2 }}>
+        <MuiContainer maxWidth="md" sx={{ mt: 2 }}>
             {children}
         </MuiContainer>
     )

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { AppBar, Box, Typography, Button } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { grey } from "@mui/material/colors";
 
 const MobileAppBar = (props) => {
     const { setDrawerOpen } = props;
@@ -9,25 +11,24 @@ const MobileAppBar = (props) => {
 
     const abbBarStyle = {
         boxShadow: 0,
-        padding: '0.5rem 0.5rem 1rem 0.5rem',
+        backgroundImage: 'none',
+        pt: 2,
+        pb: 2,
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection: 'row',
+        flexDirection: 'row'
     }
 
     return (
-        <AppBar position="fixed" color="white" sx={abbBarStyle}>
+        <AppBar position="static" sx={abbBarStyle}>
             <Box>
-                <Button>
-                    <Link href='/'>
-                        <Typography variant="h5" sx={{ letterSpacing: 1 }}>Portfolio</Typography>
-                    </Link>
-                </Button>
+                <Button sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></Button>
             </Box>
             <Box>
-                <Button onClick={openDrawer}><MenuIcon /></Button>
+                <Button sx={{ color: grey[200] }} ><SettingsIcon /></Button>
             </Box>
+
         </AppBar>
     )
 }
