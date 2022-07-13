@@ -15,7 +15,7 @@ const ExperienceBlock = (props) => {
             <Box key={_id} sx={{ mb: 4 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={4}>
-                        <Typography variant="body1" sx={{ fontSize: '1.1rem', fontWeight: 500 }}>{organization} {isIncoming && ' (予定)'} <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>/ {role}</span></Typography>
+                        <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} {isIncoming && ' (予定)'} <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>/ {role}</span></Typography>
                         <Stack direction='row' sx={{ color: grey[500] }}>
                             <Typography variant="body1" sx={{ mr: 1 }}>{location}</Typography>
                             <Typography variant="body1">{start_date} - {isPresent && !isIncoming ? '現在' : end_date}</Typography>
@@ -31,7 +31,7 @@ const ExperienceBlock = (props) => {
 
     return (
         <Box>
-            <Typography variant="h5">職務経験</Typography>
+            <Typography variant="h6" sx={{ mb: 2 }}>職務経験</Typography>
             {experienceItems}
         </Box>
     )

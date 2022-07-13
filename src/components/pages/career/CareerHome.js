@@ -17,7 +17,7 @@ const CareerHome = (props) => {
     const currentDate = year + '/' + month;
 
     return (
-        <Box sx={{ '& h5': { mb: 2, fontWeight: 500 } }}>
+        <Box>
             <PageTitle text='経歴' />
             <ExperienceBlock experienceData={experienceData} currentDate={currentDate} />
             <Divider sx={{ mb: 2 }} />
