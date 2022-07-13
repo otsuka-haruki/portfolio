@@ -1,10 +1,18 @@
-import React from 'react'
+import Head from 'next/head';
+import Home from 'components/pages/blogs/Home';
 
 const Index = (props) => {
     const { result } = props;
 
     return (
-        <div>Index</div>
+        <>
+            <Head>
+                <title>ブログ | 大塚遥輝のポートフォリオ</title>
+            </Head>
+
+            <Home />
+        </>
+
     )
 }
 

@@ -16,7 +16,7 @@ const VolunteerBlock = (props) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={4}>
                         <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} {isIncoming && ' (予定)'} / <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>{role}</span></Typography>
-                        <Stack direction='row' sx={{ color: grey[600] }}>
+                        <Stack direction='row' sx={{ color: grey[400] }}>
                             <Typography variant="body1" sx={{ mr: 1 }}>{location}</Typography>
                             <Typography variant="body1">{start_date} - {isPresent && !isIncoming ? '現在' : end_date}</Typography>
                         </Stack>

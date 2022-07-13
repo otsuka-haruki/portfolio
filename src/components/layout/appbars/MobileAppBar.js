@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { AppBar, Box, Typography, Button } from "@mui/material";
+import { AppBar, Box, Typography, Button, Container } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import SettingsIcon from '@mui/icons-material/Settings';
+import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
+import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import { grey } from "@mui/material/colors";
 
 const MobileAppBar = (props) => {
@@ -22,13 +22,15 @@ const MobileAppBar = (props) => {
 
     return (
         <AppBar position="static" sx={abbBarStyle}>
-            <Box>
-                <Button sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></Button>
-            </Box>
-            <Box>
-                <Button sx={{ color: grey[200] }} ><SettingsIcon /></Button>
-            </Box>
-
+            <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Box>
+                    <Button sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></Button>
+                </Box>
+                <Box>
+                    <Button size="small" color='grey'><DarkModeRoundedIcon /></Button>
+                    <Button size="small" color='grey'><TranslateRoundedIcon /></Button>
+                </Box>
+            </Container>
         </AppBar>
     )
 }

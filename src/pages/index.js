@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Grid, CardContent, Card, Typography, CardActionArea } from "@mui/material";
+import Home from "components/pages/home/Home";
 
 const Index = () => {
 
@@ -19,7 +19,7 @@ const Index = () => {
         <title>ホーム | 大塚遥輝のポートフォリオ</title>
       </Head>
 
-
+      <Home />
     </>
   )
 }
