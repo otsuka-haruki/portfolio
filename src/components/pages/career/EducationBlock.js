@@ -1,23 +1,22 @@
 import { Box, Typography, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { Fragment } from "react";
 
 const EducationBlock = (props) => {
-    const { educationData, currentDate } = props;
+    const { educationData, lang } = props;
 
-    educationData.sort((a, b) => a.start_date > b.start_date ? -1 : 1);
+    educationData.sort((a, b) => a.startDate > b.startDate ? -1 : 1);
 
     const educationItems = educationData.map(data => {
-        const { _id, location, role, organization, start_date, end_date, about, disabled } = data;
+        const { id, [lang]: { location, role, organization, startDate, endDate, disabled } } = data;
 
-        if (disabled) return <Fragment key={_id}></Fragment>
+        if (disabled) return <div key={id}></div>
 
         return (
-            <Box key={_id} sx={{ mb: 4 }}>
+            <Box key={id} sx={{ mb: 4 }}>
                 <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} / <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>{role}</span></Typography>
                 <Stack direction='row' sx={{ color: grey[400] }}>
                     <Typography variant="body1" sx={{ mr: 1 }}>{location}</Typography>
-                    <Typography variant="body1">{start_date} - {end_date}</Typography>
+                    <Typography variant="body1">{startDate} - {endDate}</Typography>
                 </Stack>
             </Box>
         )
@@ -25,7 +24,7 @@ const EducationBlock = (props) => {
 
     return (
         <Box>
-            <Typography variant="h6" sx={{ mb: 2 }}>教育</Typography>
+            <Typography variant="h6" sx={{ mb: 2 }}>{lang === 'ja' ? '教育' : 'Education'}</Typography>
             {educationItems}
         </Box>
     )

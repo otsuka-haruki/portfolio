@@ -15,8 +15,6 @@ const LaptopAppBar = () => {
         pb: 2
     }
 
-    // const langOptions = ['日本語', 'English'];
-
     const toggleTheme = () => {
 
     };
@@ -29,25 +27,15 @@ const LaptopAppBar = () => {
         <MuiAppBar position="static" color="white" sx={abbBarStyle}>
             <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box>
-                    <LinkButton size='large' href="/" color={pathname === '/' ? 'primary' : 'grey'} sx={{ letterSpacing: 2 }}>ポートフォリオ</LinkButton>
+                    <LinkButton href="/" color={pathname === '/' ? 'primary' : 'grey'} sx={{ letterSpacing: 2 }}>ホーム</LinkButton>
                     <LinkButton href="/career" color={pathname === '/career' ? 'primary' : 'grey'} >経歴</LinkButton>
                     <LinkButton href="/blogs" color={pathname === '/blogs' ? 'primary' : 'grey'} >ブログ</LinkButton>
                 </Box>
                 <Box>
-                    <Button
-                        size="small"
-                        color="grey"
-                        sx={{ color: grey[500], mr: 1 }}
-                        onClick={toggleTheme}
-                    >
+                    <Button size="small" color="grey" sx={{ color: grey[500], mr: 1 }} onClick={toggleTheme}>
                         <DarkModeRoundedIcon />
                     </Button>
-                    <Button
-                        size="small"
-                        color="grey"
-                        sx={{ color: grey[500] }}
-                        onClick={toggleLanguage}
-                    >
+                    <Button size="small" color="grey" sx={{ color: grey[500] }} onClick={toggleLanguage}>
                         <TranslateRoundedIcon />
                     </Button>
                 </Box>

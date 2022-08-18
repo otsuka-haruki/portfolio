@@ -1,15 +1,37 @@
+import { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { Box, Divider, LinearProgress } from "@mui/material";
+import { db } from "config/firebase";
 import PageTitle from "components/common/PageTitle";
 import ExperienceBlock from "./ExperienceBlock";
 import EducationBlock from "./EducationBlock";
 import VolunteerBlock from "./VolunteerBlock";
-import { Box, Divider } from "@mui/material";
+import LinearProgressBox from "components/common/LinearProgressBox";
 
-const CareerHome = (props) => {
-    const { careerData } = props;
+const CareerHome = () => {
+    const [careers, setCareers] = useState([]);
+    const lang = 'ja';
 
-    const experienceData = careerData.filter(data => data.tags.includes('experience'));
-    const educationData = careerData.filter(data => data.tags.includes('education'));
-    const volunteerData = careerData.filter(data => data.tags.includes('volunteer'));
+    useEffect(() => {
+        (async () => {
+            const temp = [];
+            const querySnapshot = await getDocs(collection(db, "career"));
+            querySnapshot.forEach(doc => temp.push({ id: doc.id, ...doc.data() }));
+            setCareers(temp);
+        })();
+    }, []);
+
+    if (careers.length === 0) return <LinearProgressBox />;
+
+    const experienceCareer = careers.filter(career => career[lang].tags.includes('experience'));
+
+    const educationCareer = careers.filter(career => career[lang].tags.includes('education'));
+
+    const volunteerCareer = careers.map(career => {
+        if (career[lang].tags.includes('volunteer')) {
+            return career[lang];
+        }
+    });
 
     const date = new Date();
     const year = date.getFullYear();
@@ -18,12 +40,12 @@ const CareerHome = (props) => {
 
     return (
         <Box>
-            <PageTitle text='経歴' />
-            <ExperienceBlock experienceData={experienceData} currentDate={currentDate} />
+            <PageTitle>経歴</PageTitle>
+            <ExperienceBlock experienceData={experienceCareer} currentDate={currentDate} lang={lang} />
             <Divider sx={{ mb: 2 }} />
-            <EducationBlock educationData={educationData} currentDate={currentDate} />
+            <EducationBlock educationData={educationCareer} lang={lang} />
             <Divider sx={{ mb: 2 }} />
-            <VolunteerBlock volunteerData={volunteerData} currentDate={currentDate} />
+            {/* <VolunteerBlock volunteerData={volunteerData} currentDate={currentDate} /> */}
         </Box>
     )
 }
