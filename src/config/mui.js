@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { grey, pink, teal } from "@mui/material/colors";
+import { blue, grey, pink, teal } from "@mui/material/colors";
 
 export const customTheme = createTheme({
     palette: {
@@ -11,6 +11,9 @@ export const customTheme = createTheme({
             main: pink[200]
         },
         // basic colors
+        'blue': {
+            main: blue[200]
+        },
         'white': {
             main: '#fff'
         },

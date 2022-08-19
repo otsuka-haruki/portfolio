@@ -1,8 +1,8 @@
 import { Box, LinearProgress } from "@mui/material"
 
-const LinearProgressBox = () => {
+const LinearProgressBox = ({ ...others }) => {
     return (
-        <Box>
+        <Box {...others}>
             <LinearProgress />
         </Box>
     )

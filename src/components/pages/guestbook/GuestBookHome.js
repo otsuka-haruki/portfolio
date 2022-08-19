@@ -1,5 +1,6 @@
 import AddLogCard from "./AddLogCard";
 import PageTitle from "components/common/PageTitle";
+import LogList from "./LogList";
 
 const GuestBookHome = () => {
 
@@ -7,6 +8,7 @@ const GuestBookHome = () => {
         <>
             <PageTitle>ゲストブック</PageTitle>
             <AddLogCard />
+            <LogList />
         </>
     )
 }

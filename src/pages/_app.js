@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, increment } from "firebase/firestore";
 import { ThemeProvider } from '@mui/material';
 import { db } from 'config/firebase';
 import '../styles/globals.css';

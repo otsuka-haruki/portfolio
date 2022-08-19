@@ -1,8 +1,8 @@
 import { CircularProgress, Box } from "@mui/material"
 
-const CircularProgressBox = () => {
+const CircularProgressBox = ({ sx }) => {
     return (
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ ...sx, width: '100%', display: 'flex', justifyContent: 'center' }}>
             <CircularProgress />
         </Box>
     )
