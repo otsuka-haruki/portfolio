@@ -10,7 +10,7 @@ const Drawer = (props) => {
     const pageItems = [
         { text: 'トップ', link: '/' },
         { text: '経歴', link: '/career' },
-        { text: 'ブログ', link: '/blogs' }].map(page => (
+        { text: 'ゲストブック', link: '/guestbook' }].map(page => (
             <ListItem key={uuid()}>
                 <ListItemButton onClick={closeDrawer} sx={{ textAlign: 'center' }}>
                     <Link href={page.link}>

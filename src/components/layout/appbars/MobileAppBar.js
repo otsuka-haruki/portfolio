@@ -22,15 +22,15 @@ const MobileAppBar = (props) => {
 
     return (
         <AppBar position="static" sx={abbBarStyle}>
-            <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box>
-                    <Button sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></Button>
-                </Box>
-                <Box>
-                    <Button size="small" color='grey'><DarkModeRoundedIcon /></Button>
-                    <Button size="small" color='grey'><TranslateRoundedIcon /></Button>
-                </Box>
-            </Container>
+            {/* <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between' }}> */}
+            <Box>
+                <Button sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></Button>
+            </Box>
+            <Box>
+                <Button size="small" color='grey'><DarkModeRoundedIcon /></Button>
+                <Button size="small" color='grey'><TranslateRoundedIcon /></Button>
+            </Box>
+            {/* </Container> */}
         </AppBar>
     )
 }

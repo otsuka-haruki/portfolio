@@ -23,15 +23,9 @@ const CareerHome = () => {
 
     if (careers.length === 0) return <LinearProgressBox />;
 
-    const experienceCareer = careers.filter(career => career[lang].tags.includes('experience'));
-
-    const educationCareer = careers.filter(career => career[lang].tags.includes('education'));
-
-    const volunteerCareer = careers.map(career => {
-        if (career[lang].tags.includes('volunteer')) {
-            return career[lang];
-        }
-    });
+    const experienceCareer = careers.filter(career => career.tags.includes('experience'));
+    const educationCareer = careers.filter(career => career.tags.includes('education'));
+    const volunteerCareer = careers.filter(career => career.tags.includes('volunteer'));
 
     const date = new Date();
     const year = date.getFullYear();
@@ -45,7 +39,7 @@ const CareerHome = () => {
             <Divider sx={{ mb: 2 }} />
             <EducationBlock educationData={educationCareer} lang={lang} />
             <Divider sx={{ mb: 2 }} />
-            {/* <VolunteerBlock volunteerData={volunteerData} currentDate={currentDate} /> */}
+            <VolunteerBlock volunteerData={volunteerCareer} lang={lang} />
         </Box>
     )
 }

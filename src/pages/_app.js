@@ -1,25 +1,40 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { doc, updateDoc } from "firebase/firestore";
 import { ThemeProvider } from '@mui/material';
+import { db } from 'config/firebase';
+import '../styles/globals.css';
+import { customTheme } from 'config/mui';
 import { firebaseApp } from 'config/firebase';
 import Layout from 'components/layout/Layout';
-import { customTheme } from 'config/mui';
-import '../styles/globals.css';
-import { UserContextProvider } from 'context/userContext';
 
 function MyApp({ Component, pageProps }) {
+  const { pathname } = useRouter();
+
+  useEffect(() => {
+    const incrementPageviews = async () => {
+      if (window.location.hostname === 'localhost') return;
+
+      const docRef = doc(db, "statistics", "pageviews");
+      await updateDoc(docRef, {
+        pageviews: increment(1)
+      });
+    }
+
+    incrementPageviews();
+  }, [pathname]);
 
   return (
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <UserContextProvider>
-        <ThemeProvider theme={customTheme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
-      </UserContextProvider>
+      <ThemeProvider theme={customTheme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </>
   )
 }

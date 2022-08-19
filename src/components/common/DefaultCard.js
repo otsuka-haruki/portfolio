@@ -5,7 +5,7 @@ const DefaultCard = (props) => {
     const { children, sx, ...others } = props;
 
     return (
-        <Card sx={{ bgcolor: grey[200], ...sx }}  {...others}>
+        <Card sx={{ ...sx }}  {...others}>
             {children}
         </Card>
     )

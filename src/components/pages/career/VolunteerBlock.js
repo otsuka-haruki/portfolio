@@ -2,27 +2,26 @@ import { Box, Typography, Grid, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 const VolunteerBlock = (props) => {
-    const { volunteerData, currentDate } = props;
+    const { volunteerData, currentDate, lang } = props;
 
-    volunteerData.sort((a, b) => a.start_date > b.start_date ? -1 : 1);
+    volunteerData.sort((a, b) => a.startDate > b.startDate ? -1 : 1);
 
     const volunternItems = volunteerData.map(data => {
-        const { _id, role, location, organization, start_date, end_date, about } = data;
-        const isIncoming = start_date > currentDate;
-        const isPresent = end_date === '' ? true : false;
+        const { id, startDate, endDate, [lang]: { location, role, organization, description, disabled } } = data;
+        if (startDate > currentDate) return <div key={id}></div>
 
         return (
-            <Box key={_id} sx={{ mb: 4 }}>
+            <Box key={id} sx={{ mb: 4 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={4}>
-                        <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} {isIncoming && ' (予定)'} / <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>{role}</span></Typography>
+                        <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} / <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>{role}</span></Typography>
                         <Stack direction='row' sx={{ color: grey[400] }}>
                             <Typography variant="body1" sx={{ mr: 1 }}>{location}</Typography>
-                            <Typography variant="body1">{start_date} - {isPresent && !isIncoming ? '現在' : end_date}</Typography>
+                            <Typography variant="body1">{startDate} - {endDate ? endDate : '現在'}</Typography>
                         </Stack>
                     </Grid>
                     <Grid item xs={12} md={8}>
-                        <Typography variant="body1">{about && about}</Typography>
+                        <Typography variant="body1">{description}</Typography>
                     </Grid>
                 </Grid>
             </Box>

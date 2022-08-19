@@ -7,7 +7,7 @@ const EducationBlock = (props) => {
     educationData.sort((a, b) => a.startDate > b.startDate ? -1 : 1);
 
     const educationItems = educationData.map(data => {
-        const { id, [lang]: { location, role, organization, startDate, endDate, disabled } } = data;
+        const { id, startDate, endDate, [lang]: { location, role, organization, disabled } } = data;
 
         if (disabled) return <div key={id}></div>
 
@@ -16,7 +16,7 @@ const EducationBlock = (props) => {
                 <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} / <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>{role}</span></Typography>
                 <Stack direction='row' sx={{ color: grey[400] }}>
                     <Typography variant="body1" sx={{ mr: 1 }}>{location}</Typography>
-                    <Typography variant="body1">{startDate} - {endDate}</Typography>
+                    <Typography variant="body1">{startDate} - {endDate ? endDate : '現在'}</Typography>
                 </Stack>
             </Box>
         )
