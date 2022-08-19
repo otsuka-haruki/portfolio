@@ -10,25 +10,21 @@ const MobileAppBar = (props) => {
     const openDrawer = () => setDrawerOpen(true);
 
     const abbBarStyle = {
-        boxShadow: 0,
-        backgroundImage: 'none',
-        pt: 2,
+        pt: 4,
         pb: 2,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexDirection: 'row'
+        boxShadow: 0,
+        // display: 'flex',
+        // justifyContent: 'space-between',
+        // alignItems: 'center',
+        // flexDirection: 'row',
+        backgroundImage: 'none',
     }
 
     return (
         <AppBar position="static" sx={abbBarStyle}>
-            {/* <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between' }}> */}
-            <Box>
-                <Button sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></Button>
-            </Box>
-            <Box>
-                <Button size="small" color='grey'><DarkModeRoundedIcon /></Button>
-                <Button size="small" color='grey'><TranslateRoundedIcon /></Button>
+            {/* <Container maxWidth="md"> */}
+            <Box sx={{ ml: 1 }}>
+                <Button size="small" sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></Button>
             </Box>
             {/* </Container> */}
         </AppBar>
