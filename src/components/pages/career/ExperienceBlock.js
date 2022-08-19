@@ -10,13 +10,11 @@ const ExperienceBlock = (props) => {
         const { id, startDate, endDate, [lang]: { location, role, description, organization, disabled } } = data;
         if (startDate > currentDate) return <div key={id}></div>;
 
-        const isPresent = endDate === '' ? true : false;
-
         return (
             <Box key={id} sx={{ mb: 4 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={4}>
-                        <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} / <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>{role}</span></Typography>
+                        <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} / <span style={{ fontSize: '0.9rem' }}>{role}</span></Typography>
                         <Stack direction='row' sx={{ color: grey[400] }}>
                             <Typography variant="body1" sx={{ mr: 1 }}>{location}</Typography>
                             <Typography variant="body1">{startDate} - {endDate ? endDate : '現在'}</Typography>

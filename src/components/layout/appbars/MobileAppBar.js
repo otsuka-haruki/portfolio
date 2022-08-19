@@ -10,8 +10,8 @@ const MobileAppBar = (props) => {
     const openDrawer = () => setDrawerOpen(true);
 
     const abbBarStyle = {
-        pt: 4,
-        pb: 2,
+        pt: 6,
+        pb: 4,
         boxShadow: 0,
         // display: 'flex',
         // justifyContent: 'space-between',
