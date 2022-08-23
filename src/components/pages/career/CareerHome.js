@@ -8,9 +8,8 @@ import EducationBlock from "./EducationBlock";
 import VolunteerBlock from "./VolunteerBlock";
 import LinearProgressBox from "components/common/LinearProgressBox";
 
-const CareerHome = () => {
+const CareerHome = ({ lang }) => {
     const [careers, setCareers] = useState([]);
-    const lang = 'ja';
 
     useEffect(() => {
         (async () => {
@@ -23,9 +22,11 @@ const CareerHome = () => {
 
     if (careers.length === 0) return <LinearProgressBox />;
 
+
     const experienceCareer = careers.filter(career => career.tags.includes('experience'));
     const educationCareer = careers.filter(career => career.tags.includes('education'));
     const volunteerCareer = careers.filter(career => career.tags.includes('volunteer'));
+    const presentText = lang === 'ja' ? '現在' : 'present';
 
     const date = new Date();
     const year = date.getFullYear();
@@ -35,11 +36,14 @@ const CareerHome = () => {
     return (
         <Box>
             <PageTitle>経歴</PageTitle>
-            <ExperienceBlock experienceData={experienceCareer} currentDate={currentDate} lang={lang} />
+            <ExperienceBlock experienceData={experienceCareer} currentDate={currentDate}
+                // lang={lang}
+                lang='ja'
+            />
             <Divider sx={{ mb: 2 }} />
-            <EducationBlock educationData={educationCareer} lang={lang} />
+            <EducationBlock educationData={educationCareer} lang={lang} presentText={presentText} />
             <Divider sx={{ mb: 2 }} />
-            <VolunteerBlock volunteerData={volunteerCareer} lang={lang} />
+            <VolunteerBlock volunteerData={volunteerCareer} lang={lang} presentText={presentText} />
         </Box>
     )
 }

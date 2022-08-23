@@ -5,14 +5,16 @@ import Container from "./Container";
 import LaptopAppBar from "./appbars/LaptopAppBar";
 import MobileAppBar from "./appbars/MobileAppBar";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, lang, setLang }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <>
-            {isMobile ? <MobileAppBar setDrawerOpen={setDrawerOpen} /> : <LaptopAppBar />}
+            {isMobile
+                ? <MobileAppBar setDrawerOpen={setDrawerOpen} />
+                : <LaptopAppBar lang={lang} setLang={setLang} />}
             <Container>
                 {children}
             </Container>

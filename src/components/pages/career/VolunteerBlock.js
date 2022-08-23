@@ -2,7 +2,7 @@ import { Box, Typography, Grid, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 const VolunteerBlock = (props) => {
-    const { volunteerData, currentDate, lang } = props;
+    const { volunteerData, currentDate, lang, presentText } = props;
 
     volunteerData.sort((a, b) => a.startDate > b.startDate ? -1 : 1);
 
@@ -17,7 +17,7 @@ const VolunteerBlock = (props) => {
                         <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} / <span style={{ fontSize: '0.9rem', fontWeight: 400 }}>{role}</span></Typography>
                         <Stack direction='row' spacing={1} sx={{ color: grey[400] }}>
                             <Typography variant="body1">{location}</Typography>
-                            <Typography variant="body1">{startDate} - {endDate ? endDate : '現在'}</Typography>
+                            <Typography variant="body1">{startDate} - {endDate ? endDate : presentText}</Typography>
                         </Stack>
                     </Grid>
                     <Grid item xs={12} md={8}>
@@ -30,7 +30,7 @@ const VolunteerBlock = (props) => {
 
     return (
         <Box>
-            <Typography variant="h6" sx={{ mb: 2 }}>ボランティア経験</Typography>
+            <Typography variant="h6" sx={{ mb: 2 }}>{lang === 'ja' ? 'ボランティア経験' : 'Volunteer Activities'}</Typography>
             {volunternItems}
         </Box>
     )

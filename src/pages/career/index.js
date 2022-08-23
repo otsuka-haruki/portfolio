@@ -1,7 +1,7 @@
 import Head from "next/head";
 import CareerHome from "components/pages/career/CareerHome";
 
-const Index = (props) => {
+const Index = ({ lang }) => {
     // const { result } = props;
     // const data = JSON.parse(result);
 
@@ -12,7 +12,8 @@ const Index = (props) => {
             </Head>
 
             <CareerHome
-            // careerData={data}
+                // careerData={data}
+                lang={lang}
             />
             <></>
         </>

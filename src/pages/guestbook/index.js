@@ -1,14 +1,15 @@
 import Head from "next/head";
 import GuestBookHome from "components/pages/guestbook/GuestBookHome";
 
-const Index = () => {
+const Index = ({ lang }) => {
+
     return (
         <>
             <Head>
-                <title>ゲストブック</title>
+                <title>{lang === 'ja' ? 'ゲストブック' : 'Guestbook'}</title>
             </Head>
 
-            <GuestBookHome />
+            <GuestBookHome lang={lang} />
         </>
     )
 }

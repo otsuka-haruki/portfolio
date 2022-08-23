@@ -6,9 +6,11 @@ import { db } from "config/firebase";
 import CircularProgressBox from "components/common/CircularProgressBox";
 
 const LogList = (props) => {
-    const { update } = props;
+    const { update, lang } = props;
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    const componentTitle = lang === 'ja' ? 'コメントの記録' : 'Comments';
 
     useEffect(() => {
         const fetchLogs = async () => {
@@ -40,7 +42,7 @@ const LogList = (props) => {
 
     return (
         <Box sx={{ mt: 4 }}>
-            <Typography variant="h6">コメントの記録</Typography>
+            <Typography variant="h6">{componentTitle}</Typography>
             {loading ? <CircularProgressBox /> : logList}
         </Box>
     )

@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import { AppBar as MuiAppBar, Container, Button, Box, Stack } from "@mui/material";
+import { AppBar as MuiAppBar, Container, Button, Box, Stack, IconButton } from "@mui/material";
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import LinkButton from "components/common/LinkButton";
 import { grey, teal } from "@mui/material/colors";
 
-const LaptopAppBar = () => {
+const LaptopAppBar = ({ lang, setLang }) => {
     const { pathname } = useRouter();
 
     const abbBarStyle = {
@@ -15,33 +15,46 @@ const LaptopAppBar = () => {
         backgroundImage: 'none',
     };
 
-    const toggleTheme = () => {
+    const toggleTheme = () => { };
 
-    };
+    const toggleLanguage = () => setLang(lang === 'ja' ? 'en' : 'ja');
 
-    const toggleLanguage = () => {
-
-    }
+    const buttons = [
+        { ja: 'ホーム', en: 'Home', href: '/', sx: { letterSpacing: lang === 'ja' && 2 } },
+        { ja: '経歴', en: 'Career', href: '/career' },
+        { ja: 'ゲストブック', en: 'Guestbook', href: '/guestbook' }
+    ].map((button, index) => {
+        const { ja, en, href, sx } = button;
+        return (
+            <LinkButton
+                key={index}
+                size='large'
+                href={href}
+                color={pathname === href ? 'primary' : 'grey'}
+                sx={{ textTransform: 'none', letterSpacing: 0.5, ...sx, }}
+            >
+                {lang === 'ja' ? ja : en}
+            </LinkButton>
+        )
+    });
 
     return (
         <MuiAppBar position="static" color="white" sx={abbBarStyle}>
-            <Container maxWidth="md">
+            <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Stack spacing={1} direction='row'>
-                    <LinkButton href="/" color={pathname === '/' ? 'primary' : 'grey'} sx={{ letterSpacing: 2 }}>ホーム</LinkButton>
-                    <LinkButton href="/career" color={pathname === '/career' ? 'primary' : 'grey'} >経歴</LinkButton>
-                    <LinkButton href="/guestbook" color={pathname === '/guestbook' ? 'primary' : 'grey'} >ゲストブック</LinkButton>
+                    {buttons}
                     {/* <LinkButton href="/blogs" color={pathname === '/blogs' ? 'primary' : 'grey'} >ブログ</LinkButton> */}
                 </Stack>
-                {/* <Box>
-                    <Button size="small" color="grey" sx={{ color: grey[500], mr: 1 }} onClick={toggleTheme}>
+                <Box>
+                    {/* <Button size="small" color="grey" sx={{ color: grey[500], mr: 1 }} onClick={toggleTheme}>
                         <DarkModeRoundedIcon />
-                    </Button>
-                    <Button size="small" color="grey" sx={{ color: grey[500] }} onClick={toggleLanguage}>
+                    </Button> */}
+                    <IconButton size="large" color="grey" onClick={toggleLanguage}>
                         <TranslateRoundedIcon />
-                    </Button>
-                </Box> */}
+                    </IconButton>
+                </Box>
             </Container>
-        </MuiAppBar>
+        </MuiAppBar >
     )
 }
 

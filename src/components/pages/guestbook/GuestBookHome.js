@@ -3,14 +3,16 @@ import AddLogCard from "./AddLogCard";
 import PageTitle from "components/common/PageTitle";
 import LogList from "./LogList";
 
-const GuestBookHome = () => {
+const GuestBookHome = ({ lang }) => {
     const [update, setUpdate] = useState(false);
+
+    const pageTitle = lang === 'ja' ? 'ゲストブック' : 'Guestbook';
 
     return (
         <>
-            <PageTitle>ゲストブック</PageTitle>
-            <AddLogCard setUpdate={setUpdate} />
-            <LogList update={update} />
+            <PageTitle>{pageTitle}</PageTitle>
+            <AddLogCard setUpdate={setUpdate} lang={lang} />
+            <LogList update={update} lang={lang} />
         </>
     )
 }
