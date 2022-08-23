@@ -1,20 +1,22 @@
 import Link from "next/link";
 import { Drawer as MuiDrawer, Box, List, ListItem, ListItemButton, ListItemText, Button, Divider } from "@mui/material";
-import { v4 as uuid } from "uuid";
+import { useRouter } from "next/router";
+import { grey } from "@mui/material/colors";
 
 const Drawer = (props) => {
-    const { drawerOpen, setDrawerOpen } = props;
+    const { drawerOpen, setDrawerOpen, lang } = props;
+    const { pathname } = useRouter();
 
     const closeDrawer = () => setDrawerOpen(false);
 
     const pageItems = [
-        { text: 'トップ', link: '/' },
-        { text: '経歴', link: '/career' },
-        { text: 'ゲストブック', link: '/guestbook' }].map(page => (
-            <ListItem key={uuid()}>
+        { text: { ja: 'ホーム', en: 'Home' }, link: '/' },
+        { text: { ja: '経歴', en: 'Career' }, link: '/career' },
+        { text: { ja: 'ゲストブック', en: 'Guestbook' }, link: '/guestbook' }].map(page => (
+            <ListItem key={page.text[lang]} sx={{ bgcolor: pathname === page.link && grey[700] }}>
                 <ListItemButton onClick={closeDrawer} sx={{ textAlign: 'center' }}>
                     <Link href={page.link}>
-                        <ListItemText primary={page.text.toUpperCase()} />
+                        <ListItemText primary={page.text[lang].toUpperCase()} />
                     </Link>
                 </ListItemButton>
             </ListItem>
@@ -27,10 +29,6 @@ const Drawer = (props) => {
                 <List sx={{ width: '100%' }}>
                     {pageItems}
                 </List>
-                <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 4, pl: 4, pr: 4 }}>
-                    <Button size="large" variant="outlined">日本語</Button>
-                    <Button size="large">English</Button>
-                </Box>
             </Box>
         </MuiDrawer>
     )

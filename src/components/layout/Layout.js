@@ -13,12 +13,12 @@ const Layout = ({ children, lang, setLang }) => {
     return (
         <>
             {isMobile
-                ? <MobileAppBar setDrawerOpen={setDrawerOpen} />
+                ? <MobileAppBar setDrawerOpen={setDrawerOpen} lang={lang} setLang={setLang} />
                 : <LaptopAppBar lang={lang} setLang={setLang} />}
             <Container>
                 {children}
             </Container>
-            <Drawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+            <Drawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} lang={lang} />
         </>
     )
 }

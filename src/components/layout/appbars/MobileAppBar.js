@@ -5,7 +5,7 @@ import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import { grey } from "@mui/material/colors";
 
 const MobileAppBar = (props) => {
-    const { setDrawerOpen } = props;
+    const { setDrawerOpen, lang, setLang } = props;
 
     const openDrawer = () => setDrawerOpen(true);
 
@@ -18,12 +18,17 @@ const MobileAppBar = (props) => {
         // flexDirection: 'row',
         // justifyContent: 'space-between',
         // alignItems: 'center',
-    }
+    };
+
+    const toggleLang = () => setLang(lang === 'ja' ? 'en' : 'ja');
 
     return (
         <AppBar position="static" sx={abbBarStyle}>
-            <Box sx={{ ml: 1 }}>
-                <Button size="small" sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></Button>
+            <Box sx={{ ml: 2, mr: 2, display: 'flex', justifyContent: 'space-between' }}>
+                <IconButton size="large" sx={{ color: grey[200] }} onClick={openDrawer}><MenuIcon /></IconButton>
+                <IconButton size="large" onClick={toggleLang}>
+                    <TranslateRoundedIcon />
+                </IconButton>
             </Box>
         </AppBar>
     )
