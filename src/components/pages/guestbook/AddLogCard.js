@@ -8,10 +8,11 @@ import { getFormattedDateAndTime } from "utils/functions";
 import DefaultCard from "components/common/DefaultCard";
 import CardActionRight from "components/common/CardActionRight";
 import { useState } from "react";
-import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+// import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { LoadingButton } from "@mui/lab";
 
-const AddLogCard = () => {
+const AddLogCard = (props) => {
+    const { setUpdate } = props;
     const [sent, setSent] = useState(false);
     const [loading, setLoading] = useState(false);
     const nameInputRef = useRef();
@@ -39,14 +40,14 @@ const AddLogCard = () => {
         setSent(true);
         nameInputRef.current.value = null;
         messageInputRef.current.value = null;
-        // alert('Success!');
         // TODO: open snackbar
+        setUpdate(true);
     }
 
     return (
         <DefaultCard>
             <CardContent>
-                <Typography variant="h6">ログを残す</Typography>
+                <Typography variant="h6">コメントを残す</Typography>
                 <TextField {...defaultAttributes} label="名前" inputRef={nameInputRef} />
                 <TextField {...defaultAttributes} multiline rows={4} label="メッセージ" inputRef={messageInputRef} />
             </CardContent>

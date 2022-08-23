@@ -5,7 +5,8 @@ import { grey } from "@mui/material/colors";
 import { db } from "config/firebase";
 import CircularProgressBox from "components/common/CircularProgressBox";
 
-const LogList = () => {
+const LogList = (props) => {
+    const { update } = props;
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -21,11 +22,9 @@ const LogList = () => {
         };
 
         fetchLogs();
-    }, []);
+    }, [update]);
 
-    if (loading) return <CircularProgressBox sx={{ mt: 4 }} />;
-
-    const logList = logs.map(log => {
+    const logList = !loading && logs.map(log => {
         const { id, name, message, date } = log;
         const datePart = date.split('-')[0];
         const timePart = date.split('-')[1];
@@ -41,8 +40,8 @@ const LogList = () => {
 
     return (
         <Box sx={{ mt: 4 }}>
-            <Typography variant="h6">ログの記録</Typography>
-            {logList}
+            <Typography variant="h6">コメントの記録</Typography>
+            {loading ? <CircularProgressBox /> : logList}
         </Box>
     )
 }
