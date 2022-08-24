@@ -20,8 +20,7 @@ const CareerHome = ({ lang }) => {
         })();
     }, []);
 
-    if (careers.length === 0) return <LinearProgressBox />;
-
+    const pageTitle = lang === 'ja' ? '経歴' : 'Career';
 
     const experienceCareer = careers.filter(career => career.tags.includes('experience'));
     const educationCareer = careers.filter(career => career.tags.includes('education'));
@@ -35,15 +34,15 @@ const CareerHome = ({ lang }) => {
 
     return (
         <Box>
-            <PageTitle>経歴</PageTitle>
-            <ExperienceBlock experienceData={experienceCareer} currentDate={currentDate}
-                // lang={lang}
-                lang='ja'
-            />
-            <Divider sx={{ mb: 2 }} />
-            <EducationBlock educationData={educationCareer} lang={lang} presentText={presentText} />
-            <Divider sx={{ mb: 2 }} />
-            <VolunteerBlock volunteerData={volunteerCareer} lang={lang} presentText={presentText} />
+            <PageTitle>{pageTitle}</PageTitle>
+            {careers.length === 0 && <LinearProgressBox />}
+            {careers.length !== 0 && <Box>
+                <ExperienceBlock experienceData={experienceCareer} currentDate={currentDate} lang={lang} />
+                <Divider sx={{ mb: 2.5 }} />
+                <EducationBlock educationData={educationCareer} lang={lang} presentText={presentText} />
+                <Divider sx={{ mb: 2.5 }} />
+                <VolunteerBlock volunteerData={volunteerCareer} lang={lang} presentText={presentText} />
+            </Box>}
         </Box>
     )
 }

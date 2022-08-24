@@ -1,4 +1,4 @@
-import { Container as MuiContainer, Toolbar } from "@mui/material"
+import { Container as MuiContainer } from "@mui/material"
 
 const Container = ({ children }) => {
     return (

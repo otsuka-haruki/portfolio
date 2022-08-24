@@ -11,7 +11,9 @@ const EducationBlock = (props) => {
 
         return (
             <Box key={id} sx={{ mb: 4 }}>
-                <Typography variant="body1" sx={{ fontSize: '1.1rem' }}>{organization} / <span style={{ fontSize: '0.9rem' }}>{role}</span></Typography>
+                <Typography variant="body1" sx={{ fontSize: '1.1rem', fontWeight: 500 }}>
+                    {organization} / <span style={{ fontSize: '0.9rem' }}>{role}</span>
+                </Typography>
                 <Stack direction='row' spacing={1} sx={{ color: grey[400] }}>
                     <Typography variant="body1" >{location}</Typography>
                     <Typography variant="body1">{startDate} - {endDate ? endDate : presentText}</Typography>

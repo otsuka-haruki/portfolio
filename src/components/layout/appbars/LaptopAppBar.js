@@ -1,12 +1,22 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { AppBar as MuiAppBar, Container, Button, Box, Stack, IconButton } from "@mui/material";
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
+import { AppBar as MuiAppBar, Container, Box, Stack, Divider, Button, Menu, MenuItem, IconButton } from "@mui/material";
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
+import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
+import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import LinkButton from "components/common/LinkButton";
 import { grey, teal } from "@mui/material/colors";
 
 const LaptopAppBar = ({ lang, setLang }) => {
+    const [anchorEl, setAnchorEl] = useState(null);
     const { pathname } = useRouter();
+
+    const isJapanese = lang === 'ja';
+
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => setAnchorEl(event.currentTarget);
+    const handleClose = () => setAnchorEl(null);
 
     const abbBarStyle = {
         pt: 4,
@@ -15,44 +25,52 @@ const LaptopAppBar = ({ lang, setLang }) => {
         backgroundImage: 'none',
     };
 
-    const toggleTheme = () => { };
-
-    const toggleLanguage = () => setLang(lang === 'ja' ? 'en' : 'ja');
+    const toggleLanguage = (lang) => {
+        setLang(lang);
+        handleClose();
+    }
 
     const buttons = [
-        { ja: 'ホーム', en: 'Home', href: '/', sx: { letterSpacing: lang === 'ja' && 2 } },
+        { ja: 'ホーム', en: 'Home', href: '/', sx: { letterSpacing: isJapanese && 2 } },
         { ja: '経歴', en: 'Career', href: '/career' },
         { ja: 'ゲストブック', en: 'Guestbook', href: '/guestbook' }
-    ].map((button, index) => {
+    ].map(button => {
         const { ja, en, href, sx } = button;
         return (
             <LinkButton
-                key={index}
+                key={en}
                 size='large'
                 href={href}
                 color={pathname === href ? 'primary' : 'grey'}
                 sx={{ textTransform: 'none', letterSpacing: 0.5, ...sx, }}
             >
-                {lang === 'ja' ? ja : en}
+                {isJapanese ? ja : en}
             </LinkButton>
         )
     });
 
     return (
         <MuiAppBar position="static" color="white" sx={abbBarStyle}>
-            <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Stack spacing={1} direction='row'>
                     {buttons}
-                    {/* <LinkButton href="/blogs" color={pathname === '/blogs' ? 'primary' : 'grey'} >ブログ</LinkButton> */}
                 </Stack>
-                <Box>
-                    {/* <Button size="small" color="grey" sx={{ color: grey[500], mr: 1 }} onClick={toggleTheme}>
-                        <DarkModeRoundedIcon />
-                    </Button> */}
-                    <IconButton size="large" color="grey" onClick={toggleLanguage}>
-                        <TranslateRoundedIcon />
-                    </IconButton>
-                </Box>
+                <Stack direction='row' spacing={2}>
+                    <Button size="small" color="grey">
+                        <DarkModeRoundedIcon sx={{ fontSize: '1.3rem' }} />
+                    </Button>
+                    <Button size="small" color="grey" endIcon={<KeyboardArrowDownRoundedIcon />} onClick={handleClick}>
+                        <TranslateRoundedIcon sx={{ fontSize: '1.3rem' }} />
+                    </Button>
+                    <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                        <MenuItem onClick={() => toggleLanguage('ja')} sx={{ bgcolor: isJapanese ? grey[700] : 'none' }}>
+                            日本語
+                        </MenuItem>
+                        <MenuItem onClick={() => toggleLanguage('en')} sx={{ bgcolor: !isJapanese ? grey[700] : 'none' }}>
+                            English
+                        </MenuItem>
+                    </Menu>
+                </Stack>
             </Container>
         </MuiAppBar >
     )

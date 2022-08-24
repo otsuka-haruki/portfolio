@@ -33,8 +33,9 @@ const AddLogCard = (props) => {
     const cardTitle = lang === 'ja' ? 'コメントを残す' : 'Leave a comment';
     const nameInputLabel = lang === 'ja' ? '名前' : 'Your Name';
     const messageInputLabel = lang === 'ja' ? 'メッセージ' : 'Your Message';
-    const buttonText = lang === 'ja' ? '追加する' : 'Add a comment';
-    const buttonCompleteText = lang === 'ja' ? '追加しました' : 'Added your comment!';
+    const buttonText = lang === 'ja' ? '追加する' : 'Add comment';
+    const buttonCompleteText = lang === 'ja' ? '追加しました' : 'Successful !';
+    const snackbarCompleteText = lang === 'ja' ? 'コメントを追加しました！' : 'Added your comment!';
     const errorMessage = lang === 'ja' ? '入力に不備があります' : 'Invalid input';
 
     const addLog = async () => {
@@ -59,7 +60,7 @@ const AddLogCard = (props) => {
         setSent(true);
         nameInputRef.current.value = null;
         messageInputRef.current.value = null;
-        // snackbarCtx.openSnackbar({ message: 'コメントを追加しました！' });
+        snackbarCtx.openSnackbar({ message: snackbarCompleteText });
         setUpdate(true);
     }
 

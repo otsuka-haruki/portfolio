@@ -26,16 +26,16 @@ const LogList = (props) => {
         fetchLogs();
     }, [update]);
 
-    const logList = !loading && logs.map(log => {
+    const logList = !loading && logs.map((log, index) => {
         const { id, name, message, date } = log;
         const datePart = date.split('-')[0];
         const timePart = date.split('-')[1];
 
         return (
             <Box key={id} sx={{ mt: 2, mb: 2 }}>
+                {index !== 0 && <Divider sx={{ mb: 2 }} />}
                 <Typography variant="body1" sx={{ mb: 1 }}>{message}</Typography>
-                <Typography variant="body1" sx={{ color: grey[500], mb: 1 }}>{name} <span style={{ color: grey[700] }}> | {datePart} {timePart}</span></Typography>
-                <Divider />
+                <Typography variant="body1" sx={{ color: grey[500] }}>{name} <span style={{ color: grey[700] }}> | {datePart} {timePart}</span></Typography>
             </Box>
         );
     });
