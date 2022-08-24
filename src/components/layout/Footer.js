@@ -1,8 +1,7 @@
-import { Container, Typography, Divider, Stack, IconButton } from "@mui/material";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { Container, Typography, Link, Stack, IconButton } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 
 const Footer = () => {
     const defaultColor = grey[500];
@@ -15,21 +14,17 @@ const Footer = () => {
         color: defaultColor,
     };
 
-    const IconLink = ({ children, ...others }) => (
-        <a {...others} style={{ color: defaultColor }}>
-            {children}
-        </a>
-    )
+    const goToInstagram = () => window.open('https://www.instagram.com/otsuka_dayoo/', '_blank');
 
     return (
         <Container maxWidth="md" sx={containerStyle} >
             <Stack direction='row' justifyContent='center' spacing={3} sx={{ fontSize: '1.2rem' }}>
-                <IconLink href="https://www.instagram.com/otsuka_dayoo/" target="_blank" rel="noopener noreferrer">
-                    <FontAwesomeIcon icon={faInstagram} />
-                </IconLink>
-                <IconLink href="mailto:for.business.in.general@gmail.com">
-                    <FontAwesomeIcon icon={faEnvelope} />
-                </IconLink>
+                <IconButton href="https://www.instagram.com/otsuka_dayoo/" target="_blank" rel="noopener noreferrer" sx={{ color: defaultColor }}>
+                    <InstagramIcon />
+                </IconButton >
+                <IconButton href="mailto:for.business.in.general@gmail.com" sx={{ color: defaultColor }}>
+                    <MailOutlineRoundedIcon />
+                </IconButton>
             </Stack>
             <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
                 Designed and built by Haruki Otsuka
