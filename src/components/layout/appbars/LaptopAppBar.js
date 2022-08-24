@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { AppBar as MuiAppBar, Container, Box, Stack, Divider, Button, Menu, MenuItem, IconButton } from "@mui/material";
+import { AppBar as MuiAppBar, Container, Stack, Button, Menu, MenuItem, IconButton } from "@mui/material";
+import { grey, teal } from "@mui/material/colors";
 import TranslateRoundedIcon from '@mui/icons-material/TranslateRounded';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
-import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import LinkButton from "components/common/LinkButton";
-import { grey, teal } from "@mui/material/colors";
 
 const LaptopAppBar = ({ lang, setLang }) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -52,7 +51,7 @@ const LaptopAppBar = ({ lang, setLang }) => {
     return (
         <MuiAppBar position="static" color="white" sx={abbBarStyle}>
             <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Stack spacing={1} direction='row'>
+                <Stack spacing={1} direction='row' alignItems='center'>
                     {buttons}
                 </Stack>
                 <Stack direction='row' spacing={2}>
