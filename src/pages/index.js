@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import Home from "components/pages/home/Home";
 
 const Index = ({ lang }) => {

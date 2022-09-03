@@ -1,34 +1,35 @@
-import { Container, Typography, Link, Stack, IconButton } from "@mui/material";
-import { grey } from "@mui/material/colors";
-import InstagramIcon from '@mui/icons-material/Instagram';
-import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
+import { Container, Typography, Stack, IconButton } from "@mui/material"
+import { grey, pink, lightBlue, red } from "@mui/material/colors"
+import InstagramIcon from '@mui/icons-material/Instagram'
+import YouTubeIcon from '@mui/icons-material/YouTube'
+import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded'
 
 const Footer = () => {
-    const defaultColor = grey[500];
-
-    const containerStyle = {
-        mt: 4,
-        mb: 4,
-        // pl: { xs: 3.5 },
-        // pr: { xs: 3.5 },
-        color: defaultColor,
-    };
-
-    const goToInstagram = () => window.open('https://www.instagram.com/otsuka_dayoo/', '_blank');
+    const snsIconButtons = [
+        { href: 'https://www.instagram.com/otsuka_dayoo/', color: pink[200], icon: <InstagramIcon />, blank: true },
+        { href: 'https://youtube.com/playlist?list=PLK3zp9YH3gxIQkeNC1LcJOuD8ZyJr1ywC', color: red[200], icon: <YouTubeIcon />, blank: true },
+        { href: 'mailto:for.business.in.general@gmail.com', color: lightBlue[200], icon: <MailOutlineRoundedIcon /> }
+    ].map(sns => {
+        const { href, color, icon, blank } = sns
+        return (
+            <IconButton
+                key={href}
+                href={href}
+                sx={{ color }}
+                target={blank && "_blank"}
+                rel={blank && "noopener noreferrer"}
+            >
+                {icon}
+            </IconButton >
+        )
+    })
 
     return (
-        <Container maxWidth="md" sx={containerStyle} >
-            <Stack direction='row' justifyContent='center' spacing={3} sx={{ fontSize: '1.2rem' }}>
-                <IconButton href="https://www.instagram.com/otsuka_dayoo/" target="_blank" rel="noopener noreferrer" sx={{ color: defaultColor }}>
-                    <InstagramIcon />
-                </IconButton >
-                <IconButton href="mailto:for.business.in.general@gmail.com" sx={{ color: defaultColor }}>
-                    <MailOutlineRoundedIcon />
-                </IconButton>
+        <Container maxWidth="md" sx={{ mt: 4, mb: 4, color: grey[500] }}>
+            <Stack direction='row' justifyContent='center' spacing={2} sx={{ fontSize: '1.2rem' }}>
+                {snsIconButtons}
             </Stack>
-            <Typography variant="body1" sx={{ mt: 2, textAlign: 'center' }}>
-                Designed and built by Haruki Otsuka
-            </Typography>
+            <Typography variant="body1" align="center" sx={{ mt: 1 }}>Designed and built by Haruki Otsuka</Typography>
         </Container >
     )
 }

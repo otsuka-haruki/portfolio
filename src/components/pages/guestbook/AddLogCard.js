@@ -1,99 +1,121 @@
-import { useRef, useContext } from "react";
-import { collection, addDoc } from "firebase/firestore";
-import { CardContent, Button, Typography, TextField } from "@mui/material";
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
-import { db } from "config/firebase";
-import { getFormattedDateAndTime } from "utils/functions";
-import DefaultCard from "components/common/DefaultCard";
-import CardActionRight from "components/common/CardActionRight";
-import { useState } from "react";
-// import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
-import { LoadingButton } from "@mui/lab";
-import { snackbarContext } from "contexts/snackbarContext";
+import { useContext, useState } from "react"
+import { useRouter } from "next/router"
+import { collection, addDoc } from "firebase/firestore"
+import { CardContent, Button, Typography, TextField } from "@mui/material"
+import { LoadingButton } from "@mui/lab"
+import { red } from "@mui/material/colors"
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
+import { db } from "config/firebase"
+import { getFormattedDateAndTime } from "utils/functions"
+import DefaultCard from "components/common/DefaultCard"
+import CardActionRight from "components/common/CardActionRight"
+import { snackbarContext } from "contexts/snackbarContext"
 
-// TODO: error handling
+// TODO: only people with code can add a comment
 const AddLogCard = (props) => {
-    const { setUpdate, lang } = props;
-    const [sent, setSent] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [inputErrors, setInputErrors] = useState({ name: false, message: false });
-    // TODO: should use state instead as you can not control onChange...?
-    const nameInputRef = useRef();
-    const messageInputRef = useRef();
-    const snackbarCtx = useContext(snackbarContext);
+    const { setUpdate, lang } = props
+    const [status, setStatus] = useState('yet')
+    const [inputErrors, setInputErrors] = useState({ name: false, message: false })
+    const [name, setName] = useState('')
+    const [message, setMessage] = useState('')
+    const snackbarCtx = useContext(snackbarContext)
+    const router = useRouter()
 
-    const defaultAttributes = {
+    const { guestbookCode } = router.query
+    const isJapanese = (lang === 'ja')
+    const sent = (status === 'sent')
+    const areInputsInvalid = (name === '' || message === '')
+
+    const defaultTextFieldAttributes = {
         fullWidth: true,
         margin: "normal",
         variant: "filled",
-    };
+    }
 
-    // text based on languages
-    const cardTitle = lang === 'ja' ? 'コメントを残す' : 'Leave a comment';
-    const nameInputLabel = lang === 'ja' ? '名前' : 'Your Name';
-    const messageInputLabel = lang === 'ja' ? 'メッセージ' : 'Your Message';
-    const buttonText = lang === 'ja' ? '追加する' : 'Add comment';
-    const buttonCompleteText = lang === 'ja' ? '追加しました' : 'Successful !';
-    const snackbarCompleteText = lang === 'ja' ? 'コメントを追加しました！' : 'Added your comment!';
-    const errorMessage = lang === 'ja' ? '入力に不備があります' : 'Invalid input';
+    // Japanese and English messages
+    const cardTitle = isJapanese ? 'コメントを残す' : 'Leave a comment'
+    const noGuestbookCodeMessage = isJapanese ? 'コメントを追加するにはコードが必要です' : 'To add your comment, you need a guestbook code'
+    const nameInputLabel = isJapanese ? '名前' : 'Your Name'
+    const messageInputLabel = isJapanese ? 'メッセージ' : 'Your Message'
+    const buttonText = isJapanese ? '追加する' : 'Add comment'
+    const buttonCompleteText = isJapanese ? '追加しました！' : 'Successful!'
+    const snackbarCompleteText = isJapanese ? 'コメントを追加しました！' : 'Added your comment!'
+    const errorMessage = isJapanese ? '空の入力です' : 'Invalid input'
+
+    const handleNameChange = (event) => {
+        const value = event.target.value.trim()
+        setName(value)
+        setInputErrors({
+            ...inputErrors,
+            name: (value === '')
+        })
+    }
+
+    const handleMessageChange = (event) => {
+        const value = event.target.value.trim()
+        setMessage(value)
+        setInputErrors({
+            ...inputErrors,
+            message: (value === '')
+        })
+    }
 
     const addLog = async () => {
-        setLoading(true);
-        const name = nameInputRef.current.value;
-        const message = messageInputRef.current.value;
-        if (name === '' || message === '') {
-            setInputErrors({ name: name === '', message: message === '' });
-            setLoading(false);
-            snackbarCtx.openSnackbar({ message: errorMessage, severity: 'error' });
-            return;
-        }
+        setStatus('sending')
 
+        // TODO: use API route
         await addDoc(collection(db, "guestbook"), {
             name,
             message,
             date: getFormattedDateAndTime()
-        });
+        })
 
         // After successfully added a comment
-        setLoading(false);
-        setSent(true);
-        nameInputRef.current.value = null;
-        messageInputRef.current.value = null;
-        snackbarCtx.openSnackbar({ message: snackbarCompleteText });
-        setUpdate(true);
+        setStatus('sent')
+        setName('')
+        setMessage('')
+        snackbarCtx.openSnackbar({ message: snackbarCompleteText })
+        setUpdate(true)
     }
 
+    // *: exported component here
     return (
         <DefaultCard>
             <CardContent>
                 <Typography variant="h6">{cardTitle}</Typography>
+                {/* {!guestbookCode
+                    && <Typography variant="body1" sx={{ color: red[200] }}>{noGuestbookCodeMessage}</Typography>} */}
                 <TextField
-                    {...defaultAttributes}
+                    {...defaultTextFieldAttributes}
                     label={nameInputLabel}
-                    inputRef={nameInputRef}
+                    onChange={handleNameChange}
+                    value={name}
                     error={inputErrors.name}
                     helperText={inputErrors.name && errorMessage}
                 />
                 <TextField
-                    {...defaultAttributes}
+                    {...defaultTextFieldAttributes}
                     multiline
                     rows={4}
                     label={messageInputLabel}
-                    inputRef={messageInputRef}
+                    onChange={handleMessageChange}
+                    value={message}
                     error={inputErrors.message}
-                    helperText={inputErrors.name && errorMessage}
+                    helperText={inputErrors.message && errorMessage}
                 />
             </CardContent>
             <CardActionRight>
-                {!sent && <LoadingButton
-                    variant='contained'
-                    onClick={addLog}
-                    loading={loading}
-                    startIcon={<FavoriteBorderRoundedIcon />}
-                >
-                    {buttonText}
-                </LoadingButton>}
+                {!sent
+                    && <LoadingButton
+                        variant='contained'
+                        onClick={addLog}
+                        disabled={areInputsInvalid}
+                        loading={status === 'sending'}
+                        startIcon={<FavoriteBorderRoundedIcon />}
+                    >
+                        {buttonText}
+                    </LoadingButton>}
                 {sent && <Button startIcon={<FavoriteRoundedIcon />}>{buttonCompleteText}</Button>}
             </CardActionRight>
         </DefaultCard>
