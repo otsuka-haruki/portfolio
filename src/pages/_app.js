@@ -8,14 +8,12 @@ import '../styles/globals.css'
 import { customTheme } from 'config/mui'
 import { firebaseApp } from 'config/firebase'
 import Layout from 'components/layout/Layout'
-import { snackbarContext, SnackbarProvider } from 'contexts/snackbarContext'
+import { SnackbarProvider } from 'contexts/snackbarContext'
 import Snackbar from 'components/common/Snackbar'
-import { useContext } from 'react'
 
 function MyApp({ Component, pageProps }) {
   const [lang, setLang] = useState('ja')
   const { pathname } = useRouter()
-  const snackbarCtx = useContext(snackbarContext)
 
   useEffect(() => {
     // const incrementPageviews = async () => {
@@ -40,13 +38,7 @@ function MyApp({ Component, pageProps }) {
       })
 
       const { status, referrer } = await response.json()
-      if (status === 'success') {
-        snackbarCtx.openSnackbar({ message: 'Successfully incremented pageview!' })
-        console.log('success');
-      } else {
-        snackbarCtx.openSnackbar({ message: 'Error while incrementing pageview', severity: 'error' })
-        console.log(status);
-      }
+      console.log(status)
       console.log(referrer)
     }
 
