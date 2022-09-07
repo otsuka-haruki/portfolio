@@ -3,7 +3,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ status: 'in development' })
     }
 
-    const { mobile, platform, referrer = null } = JSON.parse(req.body)
+    const { os, browser, referrer = null } = JSON.parse(req.body)
     require('dotenv').config()
     const mysql = require('mysql2/promise')
     try {
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
         // TODO: for now, putting null as referrer
         // TODO: use prisma in the first place
         const [rows] = await connection.execute(`
-        INSERT INTO pageviews_playground VALUES (null, ${mobile}, '${platform}', ${null});
+        INSERT INTO pageviews_playground VALUES (null, ${null}, '${os}', '${browser}');
         `)
         connection.end()
         return res.status(200).json({ status: 'success', referrer })

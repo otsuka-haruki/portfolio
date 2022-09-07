@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { doc, updateDoc, increment } from "firebase/firestore"
 import { ThemeProvider } from '@mui/material'
-import { db } from 'config/firebase'
+import platform from 'platform'
 import '../styles/globals.css'
 import { customTheme } from 'config/mui'
 import { firebaseApp } from 'config/firebase'
@@ -16,30 +15,26 @@ function MyApp({ Component, pageProps }) {
   const { pathname } = useRouter()
 
   useEffect(() => {
-    // const incrementPageviews = async () => {
-    //   if (window.location.hostname === 'localhost') return
-
-    //   const docRef = doc(db, "statistics", "pageviews")
-    //   await updateDoc(docRef, {
-    //     pageviews: increment(1)
-    //   })
-    // }
-
-    // incrementPageviews()
+    const { name, os: { family } } = platform
 
     const incrementPageviews = async () => {
-      const response = await fetch('/api/pageview/increment', {
-        method: 'POST',
-        body: JSON.stringify({
-          mobile: navigator.userAgentData.mobile,
-          platform: navigator.userAgentData.platform,
-          referrer: document.referrer
+      // TODO: userAgentData is not supported on Safari, use different method to detect device
+      try {
+        const response = await fetch('/api/pageview/increment', {
+          method: 'POST',
+          body: JSON.stringify({
+            os: family,
+            browser: name,
+            referrer: document.referrer
+          })
         })
-      })
 
-      const { status, referrer } = await response.json()
-      console.log(status)
-      console.log(referrer)
+        const { status } = await response.json()
+        console.log(status)
+      } catch (error) {
+        console.error(error);
+        console.log('fetch did not work');
+      }
     }
 
     incrementPageviews()
