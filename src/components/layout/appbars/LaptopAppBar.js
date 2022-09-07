@@ -7,6 +7,7 @@ const LaptopAppBar = ({ lang, setLang }) => {
     const { pathname } = useRouter()
 
     const isJapanese = (lang === 'ja')
+    const isDevelopment = (process.env.NODE_ENV === 'development')
 
     const abbBarStyle = {
         pt: 4,
@@ -20,9 +21,12 @@ const LaptopAppBar = ({ lang, setLang }) => {
     const buttons = [
         { ja: 'ホーム', en: 'Home', href: '/', sx: { letterSpacing: isJapanese && 2 } },
         { ja: '経歴', en: 'Career', href: '/career' },
-        { ja: 'ゲストブック', en: 'Guestbook', href: '/guestbook' }
+        { ja: 'ゲストブック', en: 'Guestbook', href: '/guestbook' },
+        { ja: 'Playground', en: 'Playground', href: '/playground' }
     ].map(button => {
         const { ja, en, href, sx } = button
+        if (href === '/playground' && !isDevelopment) return
+
         return (
             <LinkButton
                 key={en}
@@ -43,9 +47,9 @@ const LaptopAppBar = ({ lang, setLang }) => {
                     {buttons}
                 </Stack>
                 <Stack direction='row' spacing={2}>
-                    {/* <Button size="small" color="grey">
-                        <DarkModeRoundedIcon sx={{ fontSize: '1.3rem' }} />
-                    </Button> */}
+                    {/* <button  className="language-button" >
+                        <DarkModeRoundedIcon />
+                    </button> */}
                     <button className="language-button" onClick={() => toggleLanguage('en')}>
                         {isJapanese ? 'EN' : 'JP'}
                     </button>

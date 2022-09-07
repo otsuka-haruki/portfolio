@@ -1,13 +1,12 @@
-import { AppBar, Box, IconButton } from "@mui/material";
+import { AppBar, Box, IconButton, Stack } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-
+import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import { grey } from "@mui/material/colors";
 
 const MobileAppBar = (props) => {
     const { setDrawerOpen, lang, setLang } = props;
 
     const isJapanese = (lang === 'ja');
-
 
     const openDrawer = () => setDrawerOpen(true);
 
@@ -26,9 +25,14 @@ const MobileAppBar = (props) => {
                 <IconButton size="large" onClick={openDrawer} sx={{ color: grey[200], }} >
                     <MenuIcon />
                 </IconButton>
-                <button className="language-button" onClick={() => toggleLanguage('en')}>
-                    {isJapanese ? 'EN' : 'JP'}
-                </button>
+                <Stack direction='row' spacing={4}>
+                    <button className="language-button" >
+                        <DarkModeRoundedIcon />
+                    </button>
+                    <button className="language-button" onClick={() => toggleLanguage('en')}>
+                        {isJapanese ? 'EN' : 'JP'}
+                    </button>
+                </Stack>
             </Box>
         </AppBar>
     )

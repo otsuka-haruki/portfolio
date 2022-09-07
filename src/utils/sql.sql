@@ -1,0 +1,1 @@
+CREATE TABLE pageviews_playground (id INT primary key)

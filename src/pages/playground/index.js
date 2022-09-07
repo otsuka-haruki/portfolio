@@ -1,7 +1,17 @@
-const index = () => {
+import { Button } from "@mui/material"
+
+const Index = () => {
+    const handleClick = () => {
+        fetch('/api/playground')
+            .then(res => res.json())
+            .then(res => console.log(res))
+    }
+
     return (
-        <div>index</div>
+        <>
+            <Button onClick={handleClick}>Click</Button>
+        </>
     )
 }
 
-export default index
+export default Index
