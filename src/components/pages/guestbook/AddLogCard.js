@@ -25,7 +25,7 @@ const AddLogCard = (props) => {
     const { guestbookCode } = router.query
     const isJapanese = (lang === 'ja')
     const sent = (status === 'sent')
-    const areInputsInvalid = (name === '' || message === '')
+    const inputsValid = (name === '' || message === '')
 
     const defaultTextFieldAttributes = {
         fullWidth: true,
@@ -62,21 +62,25 @@ const AddLogCard = (props) => {
     }
 
     const addLog = async () => {
-        setStatus('sending')
+        // setStatus('sending')
 
         // TODO: use API route
-        await addDoc(collection(db, "guestbook"), {
-            name,
-            message,
-            date: getFormattedDateAndTime()
+        const result = await fetch('/api/guestbook/post', {
+            method: 'POST',
+            body: JSON.stringify({ name, message })
         })
+        // await addDoc(collection(db, "guestbook"), {
+        //     name,
+        //     message,
+        //     date: getFormattedDateAndTime()
+        // })
 
         // After successfully added a comment
-        setStatus('sent')
-        setName('')
-        setMessage('')
-        snackbarCtx.openSnackbar({ message: snackbarCompleteText })
-        setUpdate(true)
+        // setStatus('sent')
+        // setName('')
+        // setMessage('')
+        // snackbarCtx.openSnackbar({ message: snackbarCompleteText })
+        // setUpdate(true)
     }
 
     // *: exported component here
@@ -110,7 +114,8 @@ const AddLogCard = (props) => {
                     && <LoadingButton
                         variant='contained'
                         onClick={addLog}
-                        disabled={areInputsInvalid}
+                        // disabled={inputsValid}
+                        disabled={true}
                         loading={status === 'sending'}
                         startIcon={<FavoriteBorderRoundedIcon />}
                     >

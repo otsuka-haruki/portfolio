@@ -19,14 +19,13 @@ export const customTheme = createTheme({
         error: {
             main: red.A200
         },
-        // basic colors
-        'blue': {
-            main: blue[200]
+        amber: {
+            main: amber[200]
         },
-        'white': {
+        white: {
             main: '#fff'
         },
-        'grey': {
+        grey: {
             main: grey[200]
         }
     },

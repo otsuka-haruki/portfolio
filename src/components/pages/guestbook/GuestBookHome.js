@@ -3,7 +3,7 @@ import AddLogCard from "./AddLogCard";
 import PageTitle from "components/common/PageTitle";
 import LogList from "./LogList";
 
-const GuestBookHome = ({ lang }) => {
+const GuestBookHome = ({ lang, comments }) => {
     const [update, setUpdate] = useState(false);
 
     const pageTitle = lang === 'ja' ? 'ゲストブック' : 'Guestbook';
@@ -12,7 +12,7 @@ const GuestBookHome = ({ lang }) => {
         <>
             <PageTitle>{pageTitle}</PageTitle>
             <AddLogCard setUpdate={setUpdate} lang={lang} />
-            <LogList update={update} lang={lang} />
+            <LogList update={update} lang={lang} comments={comments} />
         </>
     )
 }
