@@ -14,31 +14,9 @@ function MyApp({ Component, pageProps }) {
   const [lang, setLang] = useState('ja')
   const { pathname } = useRouter()
 
-  useEffect(() => {
-    const { name, os: { family } } = platform
-
-    const incrementPageviews = async () => {
-      // TODO: userAgentData is not supported on Safari, use different method to detect device
-      try {
-        const response = await fetch('/api/pageview/increment', {
-          method: 'POST',
-          body: JSON.stringify({
-            os: family,
-            browser: name,
-            referrer: document.referrer
-          })
-        })
-
-        const { status } = await response.json()
-        console.log(status)
-      } catch (error) {
-        console.error(error);
-        console.log('fetch did not work');
-      }
-    }
-
-    incrementPageviews()
-  }, [pathname])
+  // useEffect(() => {
+  //   const { name, os: { family } } = platform
+  // }, [])
 
   return (
     <>

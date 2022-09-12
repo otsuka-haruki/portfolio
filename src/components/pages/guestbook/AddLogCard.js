@@ -64,24 +64,24 @@ const AddLogCard = (props) => {
     const addLog = async () => {
         // setStatus('sending')
 
-        // TODO: use API route
-        const result = await fetch('/api/guestbook/post', {
+        const response = await fetch('/api/guestbook/post', {
             method: 'POST',
             body: JSON.stringify({ name, message })
         })
-        // await addDoc(collection(db, "guestbook"), {
-        //     name,
-        //     message,
-        //     date: getFormattedDateAndTime()
-        // })
 
-        // After successfully added a comment
-        // setStatus('sent')
-        // setName('')
-        // setMessage('')
-        // snackbarCtx.openSnackbar({ message: snackbarCompleteText })
-        // setUpdate(true)
+        if (response.ok) {
+            // setStatus('sent')
+            // setName('')
+            // setMessage('')
+            // snackbarCtx.openSnackbar({ message: snackbarCompleteText })
+            // setUpdate(true)
+        } else {
+            // setStatus('yet')
+            // snackbarCtx.openSnackbar({ message: snackbarCompleteText })
+        }
     }
+
+
 
     // *: exported component here
     return (
