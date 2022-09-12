@@ -10,6 +10,9 @@ const LogList = (props) => {
 
     const componentTitle = lang === 'ja' ? 'コメントの記録' : 'Comments'
 
+    // TODO: sort in db
+    comments.sort((a, b) => a.date > b.date ? -1 : 1)
+
     const commentList = comments.map((comment, index) => {
         const { id, name, message, approved, date } = comment
         const datePart = date.split('-')[0]
@@ -23,7 +26,7 @@ const LogList = (props) => {
                 <Typography variant="body1" sx={{ mb: 1 }}>{message}</Typography>
                 <Stack direction='row' spacing={2} alignItems='center'>
                     <Typography variant="body1">{name}</Typography>
-                    <Typography variant="body1" sx={{ color: grey[500] }}> / {datePart} {timePart}</Typography>
+                    <Typography variant="body1" sx={{ color: grey[500] }}>{datePart} {timePart}</Typography>
                     <Chip icon={<ChipIcon />} size="small" variant="outlined" color={chipColor} label={approved} />
                 </Stack>
             </Box>

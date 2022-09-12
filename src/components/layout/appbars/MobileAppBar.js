@@ -26,9 +26,9 @@ const MobileAppBar = (props) => {
                     <MenuIcon />
                 </IconButton>
                 <Stack direction='row' spacing={4}>
-                    <button className="language-button" >
+                    {/* <button className="language-button" >
                         <DarkModeRoundedIcon />
-                    </button>
+                    </button> */}
                     <button className="language-button" onClick={() => toggleLanguage('en')}>
                         {isJapanese ? 'EN' : 'JP'}
                     </button>

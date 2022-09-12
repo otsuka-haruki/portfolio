@@ -10,6 +10,7 @@ body{
 .language-button {
   height: 2.5rem;
   width: 2.5rem;
+  text-align: center;
   letter-spacing: 0.05rem;
   font-weight: bold;
   color: #fff;
