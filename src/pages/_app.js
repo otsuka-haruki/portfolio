@@ -16,9 +16,12 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     // ?: must be a better way of storing guestbookcode
-    const { guestbookcode } = router.query
+    const { guestbookcode, friend } = router.query
     if (guestbookcode !== undefined) {
       localStorage.setItem('guestbookcode', guestbookcode)
+    }
+    if (friend === 'true') {
+      localStorage.setItem('friend', true)
     }
 
     // increment pageview

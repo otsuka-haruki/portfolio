@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
-import AddLogCard from "./AddLogCard";
+import AddCommentCard from "./AddCommentCard";
 import PageTitle from "components/common/PageTitle";
 import LogList from "./LogList";
 
@@ -17,7 +17,7 @@ const GuestBookHome = ({ lang, comments }) => {
             </Head>
 
             <PageTitle>{pageTitle}</PageTitle>
-            <AddLogCard setUpdate={setUpdate} lang={lang} />
+            <AddCommentCard setUpdate={setUpdate} lang={lang} />
             <LogList update={update} setUpdate={setUpdate} lang={lang} comments={comments} />
         </>
     )

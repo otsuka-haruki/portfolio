@@ -4,27 +4,26 @@ import { LoadingButton } from "@mui/lab"
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import { getFormattedDateAndTime } from "utils/functions"
-import DefaultCard from "components/common/DefaultCard"
-import CardActionRight from "components/common/CardActionRight"
+import { DefaultCard, CardActionRight } from "components/common/CardComponents"
 import { snackbarContext } from "contexts/snackbarContext"
 
-const AddLogCard = (props) => {
+const AddCommentCard = (props) => {
     const { setUpdate, lang } = props
     const [status, setStatus] = useState('yet')
+    const [friend, setFriend] = useState(false)
     const [inputErrors, setInputErrors] = useState({ name: false, message: false })
     const [name, setName] = useState('')
     const [message, setMessage] = useState('')
     const snackbarCtx = useContext(snackbarContext)
 
-    // ?: come up with better way
+    // ?: isn't there any better way than using localstorage?
     useEffect(() => {
-        const guestbookCode = localStorage.guestbookcode
-        if (!guestbookCode) {
-            setStatus('no guestbookcode')
+        if (localStorage.getItem('friend')) {
+            setFriend(true)
         }
     }, [])
 
-    if (status === 'no guestbookcode') return <></>
+    if (!friend) return <></>
 
     const isJapanese = (lang === 'ja')
     const sent = (status === 'sent')
@@ -64,14 +63,13 @@ const AddLogCard = (props) => {
         })
     }
 
-    const addLog = async () => {
+    const addComment = async () => {
         setStatus('sending')
-        const guestbookCode = localStorage.guestbookcode
         const date = getFormattedDateAndTime(new Date())
 
         const response = await fetch('/api/guestbook/post', {
             method: 'POST',
-            body: JSON.stringify({ name, message, date, guestbookCode })
+            body: JSON.stringify({ name, message, date, friend })
         })
 
         if (response.ok) {
@@ -80,12 +78,22 @@ const AddLogCard = (props) => {
             setMessage('')
             setUpdate(true)
             snackbarCtx.openSnackbar({ message: snackbarCompleteText })
-            localStorage.removeItem('guestbookcode')
         } else {
             setStatus('yet')
             snackbarCtx.openSnackbar({ message: snackbarErrorText, severity: 'error' })
         }
     }
+
+    const SendButton = () =>
+        <LoadingButton
+            variant='contained'
+            onClick={addComment}
+            disabled={inputsValid}
+            loading={status === 'sending'}
+            startIcon={<FavoriteBorderRoundedIcon />}
+        >
+            {buttonText}
+        </LoadingButton>
 
     // *: final component here
     return (
@@ -112,20 +120,11 @@ const AddLogCard = (props) => {
                 />
             </CardContent>
             <CardActionRight>
-                {!sent
-                    && <LoadingButton
-                        variant='contained'
-                        onClick={addLog}
-                        disabled={inputsValid}
-                        loading={status === 'sending'}
-                        startIcon={<FavoriteBorderRoundedIcon />}
-                    >
-                        {buttonText}
-                    </LoadingButton>}
+                {!sent && <SendButton />}
                 {sent && <Button startIcon={<FavoriteRoundedIcon />}>{buttonCompleteText}</Button>}
             </CardActionRight>
         </DefaultCard>
     )
 }
 
-export default AddLogCard
+export default AddCommentCard

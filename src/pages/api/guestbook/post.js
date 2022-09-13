@@ -1,12 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 
 export default async function handler(req, res) {
-    const { guestbookCode, name, message, date } = JSON.parse(req.body)
+    const { friend, name, message, date } = JSON.parse(req.body)
     const prisma = new PrismaClient()
 
-    if (guestbookCode !== process.env.GUESTCODE) {
-        console.log('no guestbook code')
-        return res.status(500).send('Guestbook code is missing')
+    if (friend !== true) {
+        console.log('Not friend')
+        return res.status(500).send('You are not permitted to add comment')
     }
 
     try {
@@ -18,9 +18,9 @@ export default async function handler(req, res) {
                 approved: 'pending'
             }
         })
-        res.status(200).send('success')
+        return res.status(200).send('success')
     } catch (error) {
         console.error(error)
-        res.status(500).send('error')
+        return res.status(500).send('error')
     }
 }
