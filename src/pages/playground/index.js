@@ -2,7 +2,7 @@ import { Button } from "@mui/material"
 
 const Index = () => {
     const handleClick = () => {
-        fetch('/api/playground')
+        fetch('/api/guestbook')
             .then(res => res.json())
             .then(res => console.log(res))
     }

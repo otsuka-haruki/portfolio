@@ -12,11 +12,18 @@ import Snackbar from 'components/common/Snackbar'
 
 function MyApp({ Component, pageProps }) {
   const [lang, setLang] = useState('ja')
-  const { pathname } = useRouter()
+  const router = useRouter()
 
-  // useEffect(() => {
-  //   const { name, os: { family } } = platform
-  // }, [])
+  useEffect(() => {
+    // ?: must be a better way of storing guestbookcode
+    const { guestbookcode } = router.query
+    if (guestbookcode !== undefined) {
+      localStorage.setItem('guestbookcode', guestbookcode)
+    }
+
+    // increment pageview
+    const { name, os: { family } } = platform
+  }, [router])
 
   return (
     <>

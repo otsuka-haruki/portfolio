@@ -1,46 +1,30 @@
-import Head from "next/head";
-import CareerHome from "components/pages/career/CareerHome";
+import CareerHome from "components/pages/career/CareerHome"
 
 const Index = ({ lang }) => {
-    // const { result } = props;
-    // const data = JSON.parse(result);
-
-    return (
-        <>
-            <Head>
-                <title>経歴 | 大塚遥輝のポートフォリオ</title>
-            </Head>
-
-            <CareerHome
-                // careerData={data}
-                lang={lang}
-            />
-            <></>
-        </>
-    )
+    return <CareerHome lang={lang} />
 }
 
 export default Index
 
 // export async function getStaticProps() {
-    // const { MongoClient } = require('mongodb');
-    // const userName = process.env.MONGODB_USERNAME;
-    // const password = process.env.MONGODB_PASSWORD;
-    // const url = process.env.MONGODB_URL;
-    // const uri = `mongodb+srv://${userName}:${password}@${url}/?retryWrites=true&w=majority`;
-    // const client = new MongoClient(uri);
+    // const { MongoClient } = require('mongodb')
+    // const userName = process.env.MONGODB_USERNAME
+    // const password = process.env.MONGODB_PASSWORD
+    // const url = process.env.MONGODB_URL
+    // const uri = `mongodb+srv://${userName}:${password}@${url}/?retryWrites=true&w=majority`
+    // const client = new MongoClient(uri)
 
-    // const result = [];
+    // const result = []
     // try {
-    //     await client.connect();
-    //     const database = client.db('career');
-    //     const ja = database.collection('ja');
-    //     const cursor = ja.find({});
+    //     await client.connect()
+    //     const database = client.db('career')
+    //     const ja = database.collection('ja')
+    //     const cursor = ja.find({})
     //     await cursor.forEach(element => {
-    //         result.push(element);
-    //     });
+    //         result.push(element)
+    //     })
     // } finally {
-    //     await client.close();
+    //     await client.close()
     // }
 
     // return {
@@ -49,8 +33,8 @@ export default Index
     //     },
     //     revalidate: 60
     // }
-//     const admin = require('firebase-admin');
-//     const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+//     const admin = require('firebase-admin')
+//     const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore')
 // if (admin.apps.length === 0) {
 //     admin.initializeApp({
 //         credential: admin.cert({
@@ -65,15 +49,15 @@ export default Index
 //         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
 //         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-pc7k1%40portfolio-b2855.iam.gserviceaccount.com"
 //         })
-//     });
+//     })
 // }
 
-//     const serverDb = getFirestore();
+//     const serverDb = getFirestore()
 
-//     const snapshot = await serverDb.collection('career').get();
+//     const snapshot = await serverDb.collection('career').get()
 //     snapshot.forEach(doc => {
-//     console.log(doc.id, '=>', doc.data());
-//     });
+//     console.log(doc.id, '=>', doc.data())
+//     })
 //     return {
 //         props: {
 //             name: 'john doe'

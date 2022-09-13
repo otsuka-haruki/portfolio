@@ -1,18 +1,13 @@
-import { useContext, useState } from "react"
-import { useRouter } from "next/router"
-import { collection, addDoc } from "firebase/firestore"
+import { useContext, useState, useEffect } from "react"
 import { CardContent, Button, Typography, TextField } from "@mui/material"
 import { LoadingButton } from "@mui/lab"
-import { red } from "@mui/material/colors"
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
-import { db } from "config/firebase"
 import { getFormattedDateAndTime } from "utils/functions"
 import DefaultCard from "components/common/DefaultCard"
 import CardActionRight from "components/common/CardActionRight"
 import { snackbarContext } from "contexts/snackbarContext"
 
-// TODO: only people with code can add a comment
 const AddLogCard = (props) => {
     const { setUpdate, lang } = props
     const [status, setStatus] = useState('yet')
@@ -20,9 +15,17 @@ const AddLogCard = (props) => {
     const [name, setName] = useState('')
     const [message, setMessage] = useState('')
     const snackbarCtx = useContext(snackbarContext)
-    const router = useRouter()
 
-    const { guestbookCode } = router.query
+    // ?: come up with better way
+    useEffect(() => {
+        const guestbookCode = localStorage.guestbookcode
+        if (!guestbookCode) {
+            setStatus('no guestbookcode')
+        }
+    }, [])
+
+    if (status === 'no guestbookcode') return <></>
+
     const isJapanese = (lang === 'ja')
     const sent = (status === 'sent')
     const inputsValid = (name === '' || message === '')
@@ -35,16 +38,16 @@ const AddLogCard = (props) => {
 
     // Japanese and English messages
     const cardTitle = isJapanese ? 'コメントを残す' : 'Leave a comment'
-    const noGuestbookCodeMessage = isJapanese ? 'コメントを追加するにはコードが必要です' : 'To add your comment, you need a guestbook code'
     const nameInputLabel = isJapanese ? '名前' : 'Your Name'
     const messageInputLabel = isJapanese ? 'メッセージ' : 'Your Message'
     const buttonText = isJapanese ? '追加する' : 'Add comment'
     const buttonCompleteText = isJapanese ? '追加しました！' : 'Successful!'
     const snackbarCompleteText = isJapanese ? 'コメントを追加しました！' : 'Added your comment!'
+    const snackbarErrorText = isJapanese ? 'エラーが起こりました' : 'Something went wrong'
     const errorMessage = isJapanese ? '空の入力です' : 'Invalid input'
 
     const handleNameChange = (event) => {
-        const value = event.target.value.trim()
+        const value = event.target.value
         setName(value)
         setInputErrors({
             ...inputErrors,
@@ -53,7 +56,7 @@ const AddLogCard = (props) => {
     }
 
     const handleMessageChange = (event) => {
-        const value = event.target.value.trim()
+        const value = event.target.value
         setMessage(value)
         setInputErrors({
             ...inputErrors,
@@ -62,34 +65,33 @@ const AddLogCard = (props) => {
     }
 
     const addLog = async () => {
-        // setStatus('sending')
+        setStatus('sending')
+        const guestbookCode = localStorage.guestbookcode
+        const date = getFormattedDateAndTime(new Date())
 
         const response = await fetch('/api/guestbook/post', {
             method: 'POST',
-            body: JSON.stringify({ name, message })
+            body: JSON.stringify({ name, message, date, guestbookCode })
         })
 
         if (response.ok) {
-            // setStatus('sent')
-            // setName('')
-            // setMessage('')
-            // snackbarCtx.openSnackbar({ message: snackbarCompleteText })
-            // setUpdate(true)
+            setStatus('sent')
+            setName('')
+            setMessage('')
+            setUpdate(true)
+            snackbarCtx.openSnackbar({ message: snackbarCompleteText })
+            localStorage.removeItem('guestbookcode')
         } else {
-            // setStatus('yet')
-            // snackbarCtx.openSnackbar({ message: snackbarCompleteText })
+            setStatus('yet')
+            snackbarCtx.openSnackbar({ message: snackbarErrorText, severity: 'error' })
         }
     }
 
-
-
-    // *: exported component here
+    // *: final component here
     return (
         <DefaultCard>
             <CardContent>
                 <Typography variant="h6">{cardTitle}</Typography>
-                {/* {!guestbookCode
-                    && <Typography variant="body1" sx={{ color: red[200] }}>{noGuestbookCodeMessage}</Typography>} */}
                 <TextField
                     {...defaultTextFieldAttributes}
                     label={nameInputLabel}
@@ -114,8 +116,7 @@ const AddLogCard = (props) => {
                     && <LoadingButton
                         variant='contained'
                         onClick={addLog}
-                        // disabled={inputsValid}
-                        disabled={true}
+                        disabled={inputsValid}
                         loading={status === 'sending'}
                         startIcon={<FavoriteBorderRoundedIcon />}
                     >

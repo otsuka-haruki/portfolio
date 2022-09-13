@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import { collection, getDocs } from "firebase/firestore";
 import { Box, Divider, LinearProgress } from "@mui/material";
 import { db } from "config/firebase";
@@ -20,7 +21,8 @@ const CareerHome = ({ lang }) => {
         })();
     }, []);
 
-    const pageTitle = lang === 'ja' ? '経歴' : 'Career';
+    const headTitle = (lang === 'ja') ? '経歴 - 大塚遥輝' : 'Career - Haruki Otsuka'
+    const pageTitle = (lang === 'ja') ? '経歴' : 'Career';
 
     const experienceCareer = careers.filter(career => career.tags.includes('experience'));
     const educationCareer = careers.filter(career => career.tags.includes('education'));
@@ -34,6 +36,10 @@ const CareerHome = ({ lang }) => {
 
     return (
         <Box>
+            <Head>
+                <title>{headTitle}</title>
+            </Head>
+
             <PageTitle>{pageTitle}</PageTitle>
             {careers.length === 0 && <LinearProgressBox />}
             {careers.length !== 0 && <Box>
