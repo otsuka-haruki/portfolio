@@ -18,6 +18,17 @@ model Guestbook {
   date     String
 }
 
+model CareerJA {
+  id           Int    @id @default(autoincrement())
+  startDate    String
+  endDate      String
+  organization String
+  role         String
+  description  String
+  location     String
+  type         String
+}
+
 // model Pageviews {
 //   id        Int      @id @default(autoincrement())
 //   visitedAt DateTime @default(now())

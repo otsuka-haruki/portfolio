@@ -16,10 +16,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     // ?: must be a better way of storing guestbookcode
-    const { guestbookcode, friend } = router.query
-    if (guestbookcode !== undefined) {
-      localStorage.setItem('guestbookcode', guestbookcode)
-    }
+    const { friend } = router.query
     if (friend === 'true') {
       localStorage.setItem('friend', true)
     }

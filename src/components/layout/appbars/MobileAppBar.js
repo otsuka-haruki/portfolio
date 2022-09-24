@@ -30,7 +30,7 @@ const MobileAppBar = (props) => {
                         <DarkModeRoundedIcon />
                     </button> */}
                     <button className="language-button" onClick={() => toggleLanguage('en')}>
-                        {isJapanese ? 'EN' : 'JP'}
+                        {isJapanese ? 'EN' : 'JA'}
                     </button>
                 </Stack>
             </Box>

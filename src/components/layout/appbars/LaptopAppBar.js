@@ -1,6 +1,5 @@
 import { useRouter } from "next/router"
-import { AppBar as MuiAppBar, Container, Stack, Button, } from "@mui/material"
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded'
+import { AppBar as MuiAppBar, Container, Stack } from "@mui/material"
 import LinkButton from "components/common/LinkButton"
 
 const LaptopAppBar = ({ lang, setLang }) => {
@@ -47,11 +46,8 @@ const LaptopAppBar = ({ lang, setLang }) => {
                     {buttons}
                 </Stack>
                 <Stack direction='row' spacing={2}>
-                    {/* <button  className="language-button" >
-                        <DarkModeRoundedIcon />
-                    </button> */}
                     <button className="language-button" onClick={() => toggleLanguage('en')}>
-                        {isJapanese ? 'EN' : 'JP'}
+                        {isJapanese ? 'EN' : 'JA'}
                     </button>
                 </Stack>
             </Container>
