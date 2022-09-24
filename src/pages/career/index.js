@@ -14,6 +14,7 @@ export async function getStaticProps() {
     })
 
     return {
-        props: { careerData }
+        props: { careerData },
+        revalidate: 10
     }
 }
