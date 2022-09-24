@@ -2,13 +2,14 @@ import { Box, Typography, Grid, Stack } from "@mui/material"
 import { grey } from "@mui/material/colors"
 
 const ExperienceBlock = (props) => {
-    const { experienceData, currentDate, lang, presentText } = props
+    const { data, isJA, presentText } = props
 
-    experienceData.sort((a, b) => a.startDate > b.startDate ? -1 : 1)
-
-    const experienceItems = experienceData.map(data => {
-        const { id, startDate, endDate, [lang]: { location, role, description, organization, disabled } } = data
-        if (startDate > currentDate) return <div key={id}></div>
+    const experienceItems = data.map(data => {
+        const { id, startDate, endDate } = data
+        const description = isJA ? data.description : data.descriptionEN
+        const organization = isJA ? data.organization : data.organizationEN
+        const role = isJA ? data.role : data.roleEN
+        const location = isJA ? data.location : data.locationEN
 
         return (
             <Box key={id} sx={{ mb: 4 }}>
@@ -32,7 +33,7 @@ const ExperienceBlock = (props) => {
 
     return (
         <Box>
-            <Typography variant="h6" sx={{ mb: 2 }}>{lang === 'ja' ? '職務経験' : 'Experience'}</Typography>
+            <Typography variant="h6" sx={{ mb: 2 }}>{isJA ? '職務経験' : 'Experience'}</Typography>
             {experienceItems}
         </Box>
     )

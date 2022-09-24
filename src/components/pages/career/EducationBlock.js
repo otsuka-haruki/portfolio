@@ -1,13 +1,14 @@
-import { Box, Typography, Stack } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Box, Typography, Stack } from "@mui/material"
+import { grey } from "@mui/material/colors"
 
 const EducationBlock = (props) => {
-    const { educationData, lang, presentText } = props;
+    const { data, isJA, presentText } = props
 
-    educationData.sort((a, b) => a.startDate > b.startDate ? -1 : 1);
-
-    const educationItems = educationData.map(data => {
-        const { id, startDate, endDate, [lang]: { location, role, organization } } = data;
+    const educationItems = data.map(data => {
+        const { id, startDate, endDate } = data
+        const organization = isJA ? data.organization : data.organizationEN
+        const role = isJA ? data.role : data.roleEN
+        const location = isJA ? data.location : data.locationEN
 
         return (
             <Box key={id} sx={{ mb: 4 }}>
@@ -20,11 +21,11 @@ const EducationBlock = (props) => {
                 </Stack>
             </Box>
         )
-    });
+    })
 
     return (
         <Box>
-            <Typography variant="h6" sx={{ mb: 2 }}>{lang === 'ja' ? '教育' : 'Education'}</Typography>
+            <Typography variant="h6" sx={{ mb: 2 }}>{isJA ? '教育' : 'Education'}</Typography>
             {educationItems}
         </Box>
     )

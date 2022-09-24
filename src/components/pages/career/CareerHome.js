@@ -9,8 +9,9 @@ import EducationBlock from "./EducationBlock"
 import VolunteerBlock from "./VolunteerBlock"
 import LinearProgressBox from "components/common/LinearProgressBox"
 
-const CareerHome = ({ lang }) => {
+const CareerHome = ({ lang, data }) => {
     const [careers, setCareers] = useState([])
+    const isJA = (lang === 'ja')
 
     useEffect(() => {
         (async () => {
@@ -21,13 +22,13 @@ const CareerHome = ({ lang }) => {
         })()
     }, [])
 
-    const headTitle = (lang === 'ja') ? '経歴 - 大塚遥輝' : 'Career - Haruki Otsuka'
-    const pageTitle = (lang === 'ja') ? '経歴' : 'Career'
+    const headTitle = isJA ? '経歴 - 大塚遥輝' : 'Career - Haruki Otsuka'
+    const pageTitle = isJA ? '経歴' : 'Career'
 
-    const experienceCareer = careers.filter(career => career.tags.includes('experience'))
-    const educationCareer = careers.filter(career => career.tags.includes('education'))
-    const volunteerCareer = careers.filter(career => career.tags.includes('volunteer'))
-    const presentText = lang === 'ja' ? '現在' : 'present'
+    const experienceCareer = data.filter(career => career.category === 'work')
+    const educationCareer = data.filter(career => career.category === 'education')
+    const volunteerCareer = data.filter(career => career.category === 'volunteer')
+    const presentText = isJA ? '現在' : 'present'
 
     const date = new Date()
     const year = date.getFullYear()
@@ -44,11 +45,11 @@ const CareerHome = ({ lang }) => {
             {careers.length === 0 && <LinearProgressBox />}
             {careers.length !== 0 &&
                 <>
-                    <ExperienceBlock experienceData={experienceCareer} currentDate={currentDate} lang={lang} presentText={presentText} />
+                    <ExperienceBlock data={experienceCareer} isJA={isJA} presentText={presentText} />
                     <Divider sx={{ mb: 2.5 }} />
-                    <EducationBlock educationData={educationCareer} lang={lang} presentText={presentText} />
+                    <EducationBlock data={educationCareer} isJA={isJA} presentText={presentText} />
                     <Divider sx={{ mb: 2.5 }} />
-                    <VolunteerBlock volunteerData={volunteerCareer} lang={lang} presentText={presentText} />
+                    <VolunteerBlock data={volunteerCareer} isJA={isJA} presentText={presentText} />
                 </>}
         </>
     )

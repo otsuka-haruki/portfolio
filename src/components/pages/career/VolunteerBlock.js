@@ -2,13 +2,14 @@ import { Box, Typography, Grid, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 const VolunteerBlock = (props) => {
-    const { volunteerData, currentDate, lang, presentText } = props;
+    const { data, isJA, presentText } = props
 
-    volunteerData.sort((a, b) => a.startDate > b.startDate ? -1 : 1);
-
-    const volunternItems = volunteerData.map(data => {
-        const { id, startDate, endDate, [lang]: { location, role, organization, description, disabled } } = data;
-        if (startDate > currentDate) return <div key={id}></div>
+    const volunternItems = data.map(data => {
+        const { id, startDate, endDate } = data
+        const description = isJA ? data.description : data.descriptionEN
+        const organization = isJA ? data.organization : data.organizationEN
+        const role = isJA ? data.role : data.roleEN
+        const location = isJA ? data.location : data.locationEN
 
         return (
             <Box key={id} sx={{ mb: 4 }}>
@@ -32,7 +33,7 @@ const VolunteerBlock = (props) => {
 
     return (
         <Box>
-            <Typography variant="h6" sx={{ mb: 2 }}>{lang === 'ja' ? 'ボランティア経験' : 'Volunteer Activities'}</Typography>
+            <Typography variant="h6" sx={{ mb: 2 }}>{isJA ? 'ボランティア経験' : 'Volunteer Activities'}</Typography>
             {volunternItems}
         </Box>
     )
