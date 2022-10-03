@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { Drawer as MuiDrawer, Box, List, ListItem, ListItemButton, ListItemText } from "@mui/material"
-import { grey } from "@mui/material/colors"
 
 const Drawer = (props) => {
     const { drawerOpen, setDrawerOpen, lang } = props
@@ -18,7 +17,7 @@ const Drawer = (props) => {
             return (
                 <ListItem
                     key={link}
-                    sx={{ bgcolor: currentPage && 'rgb(128, 203, 196, 0.1)', color: currentPage && 'rgb(128, 203, 196)' }}
+                    sx={{ bgcolor: currentPage && 'rgb(255, 255, 255, 0.2)', color: currentPage && 'rgb(128, 203, 196)' }}
                 >
                     <ListItemButton onClick={closeDrawer} sx={{ textAlign: 'center' }}>
                         <Link href={link}>
