@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Box, Typography } from "@mui/material"
 import PageTitle from "components/common/PageTitle"
 import Media from "./Media"
+import me from '../../../../public/me-black-and-white.webp'
 
 const Home = ({ lang }) => {
     const isJA = lang === 'ja'
@@ -18,9 +19,7 @@ const Home = ({ lang }) => {
             </Head>
 
             <PageTitle>{pageTitle}</PageTitle>
-            {/* <Box style={{ width: '100%' }}> */}
-            <Image src="/me-black-and-white.webp" alt="hero" width={850 * 16 / 9} height={850} />
-            {/* </Box> */}
+            <Image src={me} alt="hero" width={850 * 16 / 9} height={850} placeholder="blur" />
             <Typography variant="body1" sx={{ mt: 2 }}>{welcomeMessage}</Typography>
             {/* <Media /> */}
         </Box>
