@@ -2,12 +2,10 @@ import Head from "next/head";
 import Image from "next/image";
 import { Box, Typography } from "@mui/material"
 import PageTitle from "components/common/PageTitle"
-import Media from "./Media"
+// import Media from "./Media"
 import me from '../../../../public/me-black-and-white.webp'
 
-const Home = ({ lang }) => {
-    const isJA = lang === 'ja'
-
+const Home = ({ isJA }) => {
     const headTitle = isJA ? '大塚遥輝 - ポートフォリオ' : 'Haruki Otsuka - Portfolio'
     const pageTitle = isJA ? '大塚遥輝' : 'Haruki Otsuka'
     const welcomeMessage = isJA ? 'ようこそ、大塚遥輝のポートフォリオサイトへ！' : 'Welcome to my portfolio!'

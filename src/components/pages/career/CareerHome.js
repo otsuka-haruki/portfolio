@@ -5,8 +5,8 @@ import ExperienceBlock from "./ExperienceBlock"
 import EducationBlock from "./EducationBlock"
 import VolunteerBlock from "./VolunteerBlock"
 
-const CareerHome = ({ lang, data }) => {
-    const isJA = (lang === 'ja')
+const CareerHome = ({ isJA, data }) => {
+    // const isJA = (lang === 'ja')
     const headTitle = isJA ? '経歴 - 大塚遥輝' : 'Career - Haruki Otsuka'
     const pageTitle = isJA ? '経歴' : 'Career'
 
@@ -27,7 +27,6 @@ const CareerHome = ({ lang, data }) => {
             <EducationBlock data={educationCareer} isJA={isJA} presentText={presentText} />
             <Divider sx={{ mb: 2.5 }} />
             <VolunteerBlock data={volunteerCareer} isJA={isJA} presentText={presentText} />
-
         </>
     )
 }

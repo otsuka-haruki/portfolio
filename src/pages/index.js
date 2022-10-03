@@ -9,7 +9,7 @@ const Index = ({ lang }) => {
         <title>ホーム | 大塚遥輝のポートフォリオ</title>
       </Head>
 
-      <Home lang={lang} />
+      <Home isJA={lang === 'ja'} />
     </>
   )
 }

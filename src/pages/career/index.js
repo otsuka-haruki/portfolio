@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client"
 import CareerHome from "components/pages/career/CareerHome"
 
 const Index = ({ lang, careerData }) => {
-    return <CareerHome lang={lang} data={careerData} />
+    return <CareerHome isJA={lang === 'ja'} data={careerData} />
 }
 
 export default Index

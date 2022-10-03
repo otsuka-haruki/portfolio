@@ -5,7 +5,7 @@ import LinkButton from "components/common/LinkButton"
 const LaptopAppBar = ({ lang, setLang }) => {
     const { pathname } = useRouter()
 
-    const isJapanese = (lang === 'ja')
+    const isJA = (lang === 'ja')
     const isDevelopment = (process.env.NODE_ENV === 'development')
 
     const abbBarStyle = {
@@ -15,10 +15,10 @@ const LaptopAppBar = ({ lang, setLang }) => {
         backgroundImage: 'none',
     }
 
-    const toggleLanguage = () => setLang(isJapanese ? 'en' : 'ja')
+    const toggleLanguage = () => setLang(isJA ? 'en' : 'ja')
 
     const buttons = [
-        { ja: 'ホーム', en: 'Home', href: '/', sx: { letterSpacing: isJapanese && 2 } },
+        { ja: 'ホーム', en: 'Home', href: '/', sx: { letterSpacing: isJA && 2 } },
         { ja: '経歴', en: 'Career', href: '/career' },
         { ja: 'ゲストブック', en: 'Guestbook', href: '/guestbook' },
         { ja: 'Playground', en: 'Playground', href: '/playground' }
@@ -34,7 +34,7 @@ const LaptopAppBar = ({ lang, setLang }) => {
                 color={pathname === href ? 'primary' : 'grey'}
                 sx={{ textTransform: 'none', letterSpacing: 0.5, ...sx, }}
             >
-                {isJapanese ? ja : en}
+                {isJA ? ja : en}
             </LinkButton>
         )
     })
@@ -47,7 +47,7 @@ const LaptopAppBar = ({ lang, setLang }) => {
                 </Stack>
                 <Stack direction='row' spacing={2}>
                     <button className="language-button" onClick={() => toggleLanguage('en')}>
-                        {isJapanese ? 'EN' : 'JA'}
+                        {isJA ? 'EN' : 'JA'}
                     </button>
                 </Stack>
             </Container>

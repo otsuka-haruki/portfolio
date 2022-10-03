@@ -21,8 +21,8 @@ function MyApp({ Component, pageProps }) {
       localStorage.setItem('friend', true)
     }
 
-    // increment pageview
-    const { name, os: { family } } = platform
+    // TODO: increment pageview
+    // const { name, os: { family } } = platform
   }, [router])
 
   return (
